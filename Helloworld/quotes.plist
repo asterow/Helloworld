@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>author</key>
+		<string>Yoda</string>
+		<key>body</key>
+		<string>May the force be with you !</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Tarzan</string>
+		<key>body</key>
+		<string>HMM HMM HUG</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Macron</string>
+		<key>body</key>
+		<string>blablabla bla bla blablabla BLABLA BLAAAAA</string>
+	</dict>
+</array>
+</plist>

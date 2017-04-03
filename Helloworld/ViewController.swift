@@ -10,6 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var labelHello: UILabel!
+    @IBOutlet weak var textFieldHello: UITextField!
+    @IBOutlet weak var buttonHello: UIButton!
+    @IBAction func tapButtonHello(_ sender: Any) {
+        labelHello.text = "Hello \(textFieldHello.text!)!"
+        textFieldHello.resignFirstResponder()
+        
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
