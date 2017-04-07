@@ -7,24 +7,85 @@
 //
 
 import UIKit
+import CoreData
 
 private let reuseIdentifier = "imageCell"
 
 class ImageGalleryCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     
-//    var arrayUIImage = [UIImage]()
-//    var arrayOriginalUIImage = [UIImage]()
-    var arrayGifGiphy = [GifGiphy]()
+
+    var arrayGif = [Gif]()
+    
     var firstCell: SearchImageCollectionViewCell? = nil
     let loadingQueue = DispatchQueue(label: "com.astero.queue.loadingQueue", qos: .userInteractive)
     let gifService = GiphyService()
 
-
+    var coreDataGif = CoreDataGif()
    
+    func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
+        if gestureReconizer.state != .began {
+            return
+        }
+        
+        let p = gestureReconizer.location(in: self.collectionView)
+        let indexPath = self.collectionView?.indexPathForItem(at: p)
+        
+        if let index = indexPath {
+            var cell = self.collectionView?.cellForItem(at: index)
+            // do stuff with your cell, for example print the indexPath
+            print(index.row)
+            let alertController = UIAlertController(title: nil, message: "Delete this GIF ?", preferredStyle: .actionSheet)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+                // ...
+            }
+            alertController.addAction(cancelAction)
+            
+//            let OKAction = UIAlertAction(title: "OK", style: .default) { action in
+//                // ...
+//            }
+//            alertController.addAction(OKAction)
+            
+            let destroyAction = UIAlertAction(title: "Delete", style: .destructive) { action in
+                print(action)
+            }
+            alertController.addAction(destroyAction)
+            
+            self.present(alertController, animated: true) {
+                // ...
+            }
+
+        } else {
+            print("Could not find index path")
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        lpgr.minimumPressDuration = 0.5
+        lpgr.delaysTouchesBegan = true
+        //lpgr.delegate = self
+        self.collectionView?.addGestureRecognizer(lpgr)
+        
+        DispatchQueue.main.async {
+           
+
+            guard let arrayGif = self.coreDataGif.fetchGif() else {
+                return
+            }
+            self.arrayGif = arrayGif
+            self.collectionView?.reloadData()
+        }
+        
+        
+//        for gif in arrayGifEntity {
+//            
+//        }
 
 //        for i in 0 ..< 1000 {
 //            print("iteration: \(i)")
@@ -108,7 +169,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return arrayGifGiphy.count + 1
+        return arrayGif.count + 1
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -127,58 +188,81 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
         }
     }
     
+    func changeNavTitle(_ title: String?) {
+        DispatchQueue.main.async {
+            guard let title = title else {
+                self.title = ""
+                return
+            }
+            self.title = title
+        }
+    }
+    
     func onClickGifButton() {
         firstCell?.searchGifTextField.resignFirstResponder()
-        let apiResponseCallBack = {
-            (gifGiphy: GifGiphy) in
+        self.changeNavTitle("Downloading")
+        gifService.getRandomGif(keyWord: firstCell?.searchGifTextField.text ?? "") {
+            (gifGiphy: GifGiphy?) in
             self.loadingQueue.async {
-//            DispatchQueue.global().async{
+                //            DispatchQueue.global().async{
+                guard let gifGiphy = gifGiphy else {
+                    self.changeNavTitle("No internet connexion")
+                    
+                    return
+                }
                 guard let imgUrl = URL(string: gifGiphy.minUrl) else {
+                    self.changeNavTitle("No internet connexion")
                     print("GUARD: imgURL")
                     return
                 }
-                guard let data = try? Data(contentsOf: imgUrl) else {
+                guard let data = NSData(contentsOf: imgUrl) else {
+                    self.changeNavTitle("No internet connexion")
                     print("GUARD: data")
                     return
-
                 }
+                
+                self.changeNavTitle("")
                 self.firstCell?.gifGiphy = gifGiphy
-                self.firstCell?.gifGiphy?.minImage = UIImage.gif(data: data)
-                //self.arrayGifGiphy.append(gifGiphy)
+                self.firstCell?.gifGiphy?.minNSDataImage = data
+                self.firstCell?.gifGiphy?.minImage = UIImage.gif(data: data as Data)
                 print("Image downloaded")
                 DispatchQueue.main.async {
-                    //self.collectionView?.reloadData()
                     self.firstCell?.imageView.image = nil
                     self.firstCell?.imageView.image = self.firstCell?.gifGiphy?.minImage
                 }
             }
         }
-        gifService.getRandomGif(keyWord: firstCell?.searchGifTextField.text ?? "", callback: apiResponseCallBack)
+
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-
-//        print("indexPath: \(indexPath) - item: \(indexPath.item)")
-
         
         if indexPath.row == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "firstCell", for: indexPath)  as! SearchImageCollectionViewCell
             // Define closure to perform action on add button #1stWayToActionInCell
             cell.closureActionAddGiffButton = {
+                guard let gifGiphy = cell.gifGiphy else {
+                    print("Gif's not loaded")
+                    return
+                }
                 // check if image already exist in CollectionVieW
-                for gif in self.arrayGifGiphy {
-                    if gif.id == cell.gifGiphy?.id {
+                for gif in self.arrayGif {
+                    if gif.id == gifGiphy.id {
                         return
                     }
                 }
-                self.arrayGifGiphy.insert(cell.gifGiphy!, at: 0)
+                guard let gif = self.coreDataGif.add(gifGiphy: gifGiphy) else {
+                    print("coreDataGif.add return nil")
+                    return
+                }
+                self.arrayGif.insert(gif, at: 0)
+//                self.arrayGif = self.coreDataGif.add(gifGiphy: gifGiphy)!
                 DispatchQueue.main.async {
                     self.collectionView?.reloadData()
                 }
             }
             // Add target to perform action on search giphy button #2ndWayToActionInCell
-            cell.gifButton.addTarget(self, action: #selector(onClickGifButton), for: UIControlEvents.touchUpInside)
+            cell.gifButton.addTarget(self, action: #selector(onClickGifButton), for: .touchUpInside)
             let image = cell.imageView.image
             cell.imageView.image = nil
             cell.imageView.image = image
@@ -190,7 +274,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)  as! ImageGalleryCollectionViewCell
             DispatchQueue.main.async {
                 cell.imageView.image = nil
-                cell.imageView.image = self.arrayGifGiphy[indexPath.row - 1].minImage
+                cell.imageView.image = UIImage.gif(data: self.arrayGif[indexPath.row - 1].minImage as! Data)
             }
             return cell
         }
@@ -209,15 +293,20 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
             var indexPath = collectionView?.indexPath(for: cell)
             let row = indexPath!.row
             print("load image: \(indexPath!.row)")
-            detailImageViewController.gifGiphy = self.arrayGifGiphy[row - 1]
-            self.arrayGifGiphy[row - 1].detailImageViewController = detailImageViewController
-            if self.arrayGifGiphy[row - 1].originImage == nil {
+            detailImageViewController.gif = self.arrayGif[row - 1]
+            if detailImageViewController.gif?.originImage == nil {
                 self.loadingQueue.async {
-                    let imgUrl = URL(string: self.arrayGifGiphy[row - 1].originUrl)
-                    let data = try? Data(contentsOf: imgUrl!)
-                    self.arrayGifGiphy[row - 1].originImage = UIImage.gif(data: data!)
+                    let imgUrl = URL(string: detailImageViewController.gif!.originUrl!)
+                    let data = NSData(contentsOf: imgUrl!)
+                    detailImageViewController.gif?.originImage = data
+                    do {
+                        try detailImageViewController.gif?.managedObjectContext?.save()
+
+                    } catch let error as NSError {
+                        print("Could not save. \(error), \(error.userInfo)")
+                    }
                     DispatchQueue.main.async {
-                        self.arrayGifGiphy[row - 1].detailImageViewController?.reloadOriginalImage()
+                        detailImageViewController.reloadOriginalImage()
                         print("OriginImage downloaded: Reloading")
                     }
                 }

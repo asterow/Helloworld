@@ -14,8 +14,9 @@ class GifGiphy {
     let originUrl : String
     let id: String
     var minImage: UIImage?
+    var minNSDataImage: NSData?
     var originImage: UIImage?
-    var detailImageViewController: DetailImageViewController?
+    var originNSDataImage: NSData?
     
     init(id: String, minUrl: String, originUrl: String) {
         self.id = id

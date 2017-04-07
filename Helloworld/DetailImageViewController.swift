@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DetailImageViewController: UIViewController {
 
@@ -14,6 +15,7 @@ class DetailImageViewController: UIViewController {
     var scale: CGFloat = 1
     let maxScale: CGFloat = 10
     let minScale: CGFloat = 1
+    
     
     @IBAction func moveImage(_ sender: UIPanGestureRecognizer) {
 
@@ -23,20 +25,44 @@ class DetailImageViewController: UIViewController {
         let translationY = translation.y * scale
         let halfImageWidth = self.imageView.bounds.width / 2 * scale
         let halfImageHeight = self.imageView.bounds.height / 2 * scale
+        let navBarheight: CGFloat = UIScreen.main.bounds.height - self.imageView.bounds.height
+        //print("image Height: \(UIScreen.main.bounds.height)")
+        //print("navbarH: \(navBarheight)")
+       // print("image Height: \(self.imageView.bounds.)")
         if let view = sender.view {
             var x = view.center.x
             var y = view.center.y
 //            if (self.imageView.center.x + translationX) < halfImageWidth && (self.imageView.center.x + translationX) > self.imageView.bounds.width * (2 - scale) / 2 {
+            
+            
+
+            
             if (self.imageView.center.x + translationX) < halfImageWidth && (self.imageView.center.x + translationX) + halfImageWidth > self.imageView.bounds.width {
                 x += translationX
             }
-            if (self.imageView.center.y + translationY) < halfImageHeight && (self.imageView.center.y + translationY) + halfImageHeight > self.imageView.bounds.height {
+            else {
+                if (self.imageView.center.x + translationX) > halfImageWidth {
+                    print("1")
+                }
+                if (self.imageView.center.x + translationX) + halfImageWidth < self.imageView.bounds.width {
+                    print("2")
+                }
+            }
+            if (self.imageView.center.y + translationY) < halfImageHeight + navBarheight && (self.imageView.center.y + translationY) + halfImageHeight > self.imageView.bounds.height + navBarheight{
                 y += translationY
+            }
+            else {
+                if (self.imageView.center.y + translationY) > halfImageHeight + navBarheight {
+                    print("3")
+                }
+                if (self.imageView.center.y + translationY) + halfImageHeight < self.imageView.bounds.height + navBarheight {
+                    print("4")
+                }
             }
 
             view.center = CGPoint(x: x, y: y)
         }
-        print("imageView.center after: \(self.imageView.center)")
+        //print("imageView.center after: \(self.imageView.center)")
 
         sender.setTranslation(CGPoint.zero, in: self.imageView)
         
@@ -81,33 +107,55 @@ class DetailImageViewController: UIViewController {
             scale = sender.scale
             let halfImageWidth = self.imageView.bounds.width / 2 * scale
             let halfImageHeight = self.imageView.bounds.height / 2 * scale
+            let navBarheight: CGFloat = UIScreen.main.bounds.height - self.imageView.bounds.height
+
             if (self.imageView.center.x ) + halfImageWidth < self.imageView.bounds.width {
                 imageView.center.x = self.imageView.bounds.width - halfImageWidth
             }
             if (self.imageView.center.x ) - halfImageWidth > 0 {
                 imageView.center.x = halfImageWidth
             }
-            if (self.imageView.center.y ) + halfImageHeight < self.imageView.bounds.height {
-                imageView.center.y = self.imageView.bounds.height - halfImageHeight
+            if (self.imageView.center.y ) + halfImageHeight < self.imageView.bounds.height + navBarheight {
+                imageView.center.y = self.imageView.bounds.height - halfImageHeight + navBarheight
+                print("1Y")
+
             }
-            if (self.imageView.center.y ) - halfImageHeight > 0 {
-                imageView.center.y = halfImageHeight
+            if (self.imageView.center.y ) - halfImageHeight  > 0 {
+                print("2Y")
+                imageView.center.y = halfImageHeight + navBarheight
+
             }
             print ("sender.scale: \(sender.scale), sender.state: \(sender.state.hashValue)")
         }
     }
     //var image: UIImage? = nil
     var gifGiphy: GifGiphy?
+    var gif: Gif?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if gifGiphy?.originImage != nil {
-            imageView.image = gifGiphy?.originImage
+//        if gifGiphy?.originImage != nil {
+//            imageView.image = gifGiphy?.originImage
+//        }
+//        else {
+//            imageView.image = gifGiphy?.minImage
+//        }
+
+        DispatchQueue.main.async {
+            self.imageView.alpha = 0.0
+
+            if self.gif?.originImage != nil {
+                self.imageView.image = UIImage.gif(data: self.gif?.originImage as! Data)
+            }
+            else {
+                self.imageView.image = UIImage.gif(data: self.gif?.minImage as! Data)
+            }
+            UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseOut , animations: {
+                self.imageView.alpha = 1.0
+            }, completion: nil)
         }
-        else {
-            imageView.image = gifGiphy?.minImage
-        }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -117,11 +165,21 @@ class DetailImageViewController: UIViewController {
     }
     
     func reloadOriginalImage() {
-        if gifGiphy?.originImage != nil {
-            imageView.image = gifGiphy?.originImage
-        }
-        else {
-            imageView.image = gifGiphy?.minImage
+//        if gifGiphy?.originImage != nil {
+//            imageView.image = gifGiphy?.originImage
+//        }
+//        else {
+//            imageView.image = gifGiphy?.minImage
+//        }
+        
+    
+        DispatchQueue.main.async {
+            if self.gif?.originImage != nil {
+                self.imageView.image = UIImage.gif(data: self.gif?.originImage as! Data)
+            }
+            else {
+                self.imageView.image = UIImage.gif(data: self.gif?.minImage as! Data)
+            }
         }
     }
 
