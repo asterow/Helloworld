@@ -52,6 +52,19 @@ class CoreDataGif {
         }
     }
     
+    func deleteGif(gif: Gif) -> Bool {
+        guard let context = gif.managedObjectContext else {
+            return false
+        }
+        context.delete(gif)
+        do {
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print("deleteGif Error: \(error)")
+            return false
+        }
+    }
     
     func fetchGif() -> [Gif]?{
         
@@ -66,6 +79,7 @@ class CoreDataGif {
         
         //2
         let fetchRequest = NSFetchRequest<Gif>(entityName: "Gif")
+        
         //3
         do {
             var arrayGif = try managedContext.fetch(fetchRequest)

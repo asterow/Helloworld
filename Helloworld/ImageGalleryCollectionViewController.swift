@@ -23,43 +23,6 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
 
     var coreDataGif = CoreDataGif()
    
-    func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
-        if gestureReconizer.state != .began {
-            return
-        }
-        
-        let p = gestureReconizer.location(in: self.collectionView)
-        let indexPath = self.collectionView?.indexPathForItem(at: p)
-        
-        if let index = indexPath {
-            var cell = self.collectionView?.cellForItem(at: index)
-            // do stuff with your cell, for example print the indexPath
-            print(index.row)
-            let alertController = UIAlertController(title: nil, message: "Delete this GIF ?", preferredStyle: .actionSheet)
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
-                // ...
-            }
-            alertController.addAction(cancelAction)
-            
-//            let OKAction = UIAlertAction(title: "OK", style: .default) { action in
-//                // ...
-//            }
-//            alertController.addAction(OKAction)
-            
-            let destroyAction = UIAlertAction(title: "Delete", style: .destructive) { action in
-                print(action)
-            }
-            alertController.addAction(destroyAction)
-            
-            self.present(alertController, animated: true) {
-                // ...
-            }
-
-        } else {
-            print("Could not find index path")
-        }
-    }
     
     
     override func viewDidLoad() {
@@ -69,17 +32,18 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
         let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         lpgr.minimumPressDuration = 0.5
         lpgr.delaysTouchesBegan = true
-        //lpgr.delegate = self
         self.collectionView?.addGestureRecognizer(lpgr)
         
         DispatchQueue.main.async {
-           
-
             guard let arrayGif = self.coreDataGif.fetchGif() else {
                 return
             }
             self.arrayGif = arrayGif
-            self.collectionView?.reloadData()
+            var indexes = [IndexPath]()
+            for  i in 0 ..<  arrayGif.count {
+                indexes.append(IndexPath(row: i + 1, section: 0))
+            }
+            self.collectionView?.insertItems(at: indexes)
         }
         
         
@@ -160,34 +124,47 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
     */
 
     // MARK: UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return arrayGif.count + 1
-    }
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        guard let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else {
+    
+    func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
+        if gestureReconizer.state != .began {
             return
         }
-        flowLayout.invalidateLayout()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.row == 0 {
-            return CGSize.init(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
+        
+        let p = gestureReconizer.location(in: self.collectionView)
+        let indexPath = self.collectionView?.indexPathForItem(at: p)
+        
+        if let index = indexPath {
+//            var cell = self.collectionView?.cellForItem(at: index)
+            print(index.row)
+            let alertController = UIAlertController(title: nil, message: "Delete this GIF ?", preferredStyle: .actionSheet)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+            }
+            alertController.addAction(cancelAction)
+            
+            
+            
+            let destroyAction = UIAlertAction(title: "Delete", style: .destructive) { action in
+                if self.coreDataGif.deleteGif(gif: self.arrayGif[index.row - 1]) {
+                    self.arrayGif.remove(at: index.row - 1)
+                    DispatchQueue.main.async {
+                        var indexPaths = [IndexPath]()
+                        indexPaths.append(index)
+                        self.collectionView?.deleteItems(at: indexPaths)
+                    }
+                }
+                print(action)
+            }
+            alertController.addAction(destroyAction)
+            
+            self.present(alertController, animated: true) {
+                // ...
+            }
+            
+        } else {
+            print("Could not find index path")
         }
-        else {
-            return CGSize.init(width: 180, height: 180)
-        }
     }
-    
+
     func changeNavTitle(_ title: String?) {
         DispatchQueue.main.async {
             guard let title = title else {
@@ -232,8 +209,37 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
                 }
             }
         }
-
+        
     }
+
+
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+
+
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of items
+        return arrayGif.count + 1
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        guard let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        flowLayout.invalidateLayout()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.row == 0 {
+            return CGSize.init(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
+        }
+        else {
+            return CGSize.init(width: 180, height: 180)
+        }
+    }
+    
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -258,7 +264,10 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
                 self.arrayGif.insert(gif, at: 0)
 //                self.arrayGif = self.coreDataGif.add(gifGiphy: gifGiphy)!
                 DispatchQueue.main.async {
-                    self.collectionView?.reloadData()
+                    var indexs = [IndexPath]()
+                    indexs.append(IndexPath(row: 1, section: 0))
+                    self.collectionView?.insertItems(at: indexs)
+//                    self.collectionView?.reloadData()
                 }
             }
             // Add target to perform action on search giphy button #2ndWayToActionInCell
