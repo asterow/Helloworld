@@ -130,31 +130,31 @@ class DetailImageViewController: UIViewController {
     }
     //var image: UIImage? = nil
     var gifGiphy: GifGiphy?
-    var gif: Gif?
+//    var gif: Gif?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if gifGiphy?.originImage != nil {
-//            imageView.image = gifGiphy?.originImage
-//        }
-//        else {
-//            imageView.image = gifGiphy?.minImage
-//        }
-
-        DispatchQueue.main.async {
-            self.imageView.alpha = 0.0
-
-            if self.gif?.originImage != nil {
-                self.imageView.image = UIImage.gif(data: self.gif?.originImage as! Data)
-            }
-            else {
-                self.imageView.image = UIImage.gif(data: self.gif?.minImage as! Data)
-            }
-            UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseOut , animations: {
-                self.imageView.alpha = 1.0
-            }, completion: nil)
+        if gifGiphy?.originImage != nil {
+            imageView.image = gifGiphy?.originImage
         }
+        else {
+            imageView.image = gifGiphy?.minImage
+        }
+
+//        DispatchQueue.main.async {
+//            self.imageView.alpha = 0.0
+//
+//            if self.gif?.originImage != nil {
+//                self.imageView.image = UIImage.gif(data: self.gif?.originImage as! Data)
+//            }
+//            else {
+//                self.imageView.image = UIImage.gif(data: self.gif?.minImage as! Data)
+//            }
+//            UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseOut , animations: {
+//                self.imageView.alpha = 1.0
+//            }, completion: nil)
+//        }
         
         // Do any additional setup after loading the view.
     }
@@ -165,22 +165,22 @@ class DetailImageViewController: UIViewController {
     }
     
     func reloadOriginalImage() {
-//        if gifGiphy?.originImage != nil {
-//            imageView.image = gifGiphy?.originImage
-//        }
-//        else {
-//            imageView.image = gifGiphy?.minImage
-//        }
+        if gifGiphy?.originImage != nil {
+            imageView.image = gifGiphy?.originImage
+        }
+        else {
+            imageView.image = gifGiphy?.minImage
+        }
         
     
-        DispatchQueue.main.async {
-            if self.gif?.originImage != nil {
-                self.imageView.image = UIImage.gif(data: self.gif?.originImage as! Data)
-            }
-            else {
-                self.imageView.image = UIImage.gif(data: self.gif?.minImage as! Data)
-            }
-        }
+//        DispatchQueue.main.async {
+//            if self.gif?.originImage != nil {
+//                self.imageView.image = UIImage.gif(data: self.gif?.originImage as! Data)
+//            }
+//            else {
+//                self.imageView.image = UIImage.gif(data: self.gif?.minImage as! Data)
+//            }
+//        }
     }
 
     /*

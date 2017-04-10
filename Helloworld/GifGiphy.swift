@@ -17,10 +17,47 @@ class GifGiphy {
     var minNSDataImage: NSData?
     var originImage: UIImage?
     var originNSDataImage: NSData?
+    var gif: Gif?
     
     init(id: String, minUrl: String, originUrl: String) {
         self.id = id
         self.minUrl = minUrl
         self.originUrl = originUrl
+    }
+    init(gif: Gif) {
+        
+        self.id = gif.id!
+        self.minUrl = gif.minUrl!
+        self.originUrl = gif.originUrl!
+        self.gif = gif
+        loadGIF()
+    }
+    
+    func loadGIF() {
+        guard let gif = self.gif else {
+            print("gif's not defined")
+            return
+        }
+        guard let gifMinURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("\(gif.id!)_min") else {
+            print("can't create gifURL \(gif.id!)_min")
+            return
+        }
+        guard let minImage = UIImage.gif(url: gifMinURL.absoluteString) else {
+            print("can't load min UIImage, adding minNSDataImage to FileSystem")
+            return
+        }
+        self.minImage = minImage
+        guard let gifMaxfURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("\(gif.id!)_max") else {
+            print("can't create gifURL \(gif.id!)_max")
+            return
+        }
+        guard FileManager.default.fileExists(atPath: gifMaxfURL.path) else {
+            return
+        }
+        guard let maxImage = UIImage.gif(url: gifMaxfURL.absoluteString) else {
+            print("can't load origin UIImage")
+            return
+        }
+        self.originImage = maxImage
     }
 }

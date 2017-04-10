@@ -1,0 +1,81 @@
+
+/* Class = "UITextField"; text = "1"; ObjectID = "6XI-J8-uRw"; */
+"6XI-J8-uRw.text" = "1";
+
+/* Class = "UITextField"; text = "%"; ObjectID = "JsA-Sr-v1N"; */
+"JsA-Sr-v1N.text" = "%";
+
+/* Class = "UITextField"; text = ","; ObjectID = "LIM-sO-3D1"; */
+"LIM-sO-3D1.text" = ",";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "O4n-T2-FTh"; */
+"O4n-T2-FTh.text" = "Label";
+
+/* Class = "UITextField"; text = "✚"; ObjectID = "PQO-gd-lZs"; */
+"PQO-gd-lZs.text" = "✚";
+
+/* Class = "UITextField"; text = "6"; ObjectID = "QAY-wq-jEE"; */
+"QAY-wq-jEE.text" = "6";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "QRd-PA-BUI"; */
+"QRd-PA-BUI.normalTitle" = "Button";
+
+/* Class = "UITextField"; text = "4"; ObjectID = "UuN-Ps-qmC"; */
+"UuN-Ps-qmC.text" = "4";
+
+/* Class = "UITextField"; text = "5"; ObjectID = "Vkr-ko-a27"; */
+"Vkr-ko-a27.text" = "5";
+
+/* Class = "UITextField"; text = "➖"; ObjectID = "WPZ-xy-efb"; */
+"WPZ-xy-efb.text" = "➖";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Xkm-pV-XK8"; */
+"Xkm-pV-XK8.text" = "Label";
+
+/* Class = "UITextField"; text = "7"; ObjectID = "Y6E-qP-4LY"; */
+"Y6E-qP-4LY.text" = "7";
+
+/* Class = "UITextField"; text = "RESULT"; ObjectID = "c6d-wK-D7E"; */
+"c6d-wK-D7E.text" = "RESULT";
+
+/* Class = "UITextField"; text = "+/-"; ObjectID = "ekO-yQ-one"; */
+"ekO-yQ-one.text" = "+/-";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "fyV-Sx-12J"; */
+"fyV-Sx-12J.normalTitle" = "Button";
+
+/* Class = "UITextField"; text = "2"; ObjectID = "hJd-3j-tge"; */
+"hJd-3j-tge.text" = "2";
+
+/* Class = "UIButton"; normalTitle = "Say Hello !"; ObjectID = "i2N-gk-U7k"; */
+"i2N-gk-U7k.normalTitle" = "Say Hello !";
+
+/* Class = "UITextField"; text = "➗"; ObjectID = "iXb-jU-BdN"; */
+"iXb-jU-BdN.text" = "➗";
+
+/* Class = "UITextField"; text = "✖️"; ObjectID = "jd8-Ft-enp"; */
+"jd8-Ft-enp.text" = "✖️";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "keb-Qf-Ufm"; */
+"keb-Qf-Ufm.normalTitle" = "Button";
+
+/* Class = "UITextField"; text = "8"; ObjectID = "uub-4H-GNx"; */
+"uub-4H-GNx.text" = "8";
+
+/* Class = "UITextField"; text = "9"; ObjectID = "uzg-cf-0dp"; */
+"uzg-cf-0dp.text" = "9";
+
+/* Class = "UITextField"; text = "0"; ObjectID = "v2Y-Cr-RIA"; */
+"v2Y-Cr-RIA.text" = "0";
+
+/* Class = "UITextField"; text = "3"; ObjectID = "xs0-wE-wEu"; */
+"xs0-wE-wEu.text" = "3";
+
+/* Class = "UITextField"; text = "AC"; ObjectID = "ywJ-9f-O4w"; */
+"ywJ-9f-O4w.text" = "AC";
+
+/* Class = "UITextField"; text = "＝"; ObjectID = "z0s-4z-vfu"; */
+"z0s-4z-vfu.text" = "＝";
+
+/* Class = "UITextField"; placeholder = "Don't type here"; ObjectID = "zDn-eB-7ic"; */
+"zDn-eB-7ic.placeholder" = "Don't type here";

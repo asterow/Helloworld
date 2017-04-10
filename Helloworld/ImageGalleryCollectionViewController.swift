@@ -11,11 +11,12 @@ import CoreData
 
 private let reuseIdentifier = "imageCell"
 
-class ImageGalleryCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class ImageGalleryCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
 
     
 
     var arrayGif = [Gif]()
+    var arrayGifGiphy = [GifGiphy]()
     
     var firstCell: SearchImageCollectionViewCell? = nil
     let loadingQueue = DispatchQueue(label: "com.astero.queue.loadingQueue", qos: .userInteractive)
@@ -32,6 +33,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
         let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         lpgr.minimumPressDuration = 0.5
         lpgr.delaysTouchesBegan = true
+        lpgr.delegate = self
         self.collectionView?.addGestureRecognizer(lpgr)
         
         DispatchQueue.main.async {
@@ -39,11 +41,32 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
                 return
             }
             self.arrayGif = arrayGif
-            var indexes = [IndexPath]()
-            for  i in 0 ..<  arrayGif.count {
-                indexes.append(IndexPath(row: i + 1, section: 0))
+            
+            for gif in self.arrayGif {
+                let gifGiphy = GifGiphy(gif: gif)
+                self.arrayGifGiphy.append(gifGiphy)
             }
-            self.collectionView?.insertItems(at: indexes)
+//            if let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+//                for gif in self.arrayGif {
+//                    let imagePath = documentDirectoryURL.appendingPathComponent("\(gif.id!)_min")
+//                    do {
+//                        try gif.minImage?.write(to: imagePath)
+//                        print("Saving: \(imagePath)")
+//                    } catch {
+//                        fatalError("Can't write image \(error)")
+//                    }
+//                    
+//                }
+//            }
+//            print("Saving DONE !")
+            
+            if self.arrayGifGiphy.count > 0 {
+                var indexes = [IndexPath]()
+                for  i in 0 ..<  self.arrayGifGiphy.count {
+                    indexes.append(IndexPath(row: i + 1, section: 0))
+                }
+                self.collectionView?.insertItems(at: indexes)
+            }
         }
         
         
@@ -133,10 +156,11 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
         let p = gestureReconizer.location(in: self.collectionView)
         let indexPath = self.collectionView?.indexPathForItem(at: p)
         
-        if let index = indexPath {
+        if let index = indexPath, index.row != 0 {
 //            var cell = self.collectionView?.cellForItem(at: index)
             print(index.row)
             let alertController = UIAlertController(title: nil, message: "Delete this GIF ?", preferredStyle: .actionSheet)
+            alertController.popoverPresentationController?.sourceView = collectionView
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
             }
             alertController.addAction(cancelAction)
@@ -144,21 +168,29 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
             
             
             let destroyAction = UIAlertAction(title: "Delete", style: .destructive) { action in
-                if self.coreDataGif.deleteGif(gif: self.arrayGif[index.row - 1]) {
-                    self.arrayGif.remove(at: index.row - 1)
+                guard let gif = self.arrayGifGiphy[index.row - 1].gif else {
+                    print("gif is nil before delete")
+                    return
+                }
+                if self.coreDataGif.deleteGif(gif: gif) {
+//                    self.arrayGif.remove(at: index.row - 1)
+                    self.arrayGifGiphy.remove(at: index.row - 1)
                     DispatchQueue.main.async {
                         var indexPaths = [IndexPath]()
                         indexPaths.append(index)
                         self.collectionView?.deleteItems(at: indexPaths)
                     }
                 }
-                print(action)
+                //print(action)
             }
             alertController.addAction(destroyAction)
             
-            self.present(alertController, animated: true) {
-                // ...
-            }
+            //DispatchQueue.main.async {
+                self.present(alertController, animated: true) {
+                    // ...
+                }
+            //}
+            
             
         } else {
             print("Could not find index path")
@@ -221,7 +253,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return arrayGif.count + 1
+        return arrayGifGiphy.count + 1
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -252,22 +284,20 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
                     return
                 }
                 // check if image already exist in CollectionVieW
-                for gif in self.arrayGif {
+                for gif in self.arrayGifGiphy {
                     if gif.id == gifGiphy.id {
                         return
                     }
                 }
-                guard let gif = self.coreDataGif.add(gifGiphy: gifGiphy) else {
-                    print("coreDataGif.add return nil")
+                guard self.coreDataGif.add(gifGiphy: gifGiphy) else {
+                    print("coreDataGif.add return false")
                     return
                 }
-                self.arrayGif.insert(gif, at: 0)
-//                self.arrayGif = self.coreDataGif.add(gifGiphy: gifGiphy)!
+                self.arrayGifGiphy.insert(gifGiphy, at: 0)
                 DispatchQueue.main.async {
                     var indexs = [IndexPath]()
                     indexs.append(IndexPath(row: 1, section: 0))
                     self.collectionView?.insertItems(at: indexs)
-//                    self.collectionView?.reloadData()
                 }
             }
             // Add target to perform action on search giphy button #2ndWayToActionInCell
@@ -283,7 +313,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)  as! ImageGalleryCollectionViewCell
             DispatchQueue.main.async {
                 cell.imageView.image = nil
-                cell.imageView.image = UIImage.gif(data: self.arrayGif[indexPath.row - 1].minImage as! Data)
+                cell.imageView.image = self.arrayGifGiphy[indexPath.row - 1].minImage
             }
             return cell
         }
@@ -302,18 +332,24 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
             var indexPath = collectionView?.indexPath(for: cell)
             let row = indexPath!.row
             print("load image: \(indexPath!.row)")
-            detailImageViewController.gif = self.arrayGif[row - 1]
-            if detailImageViewController.gif?.originImage == nil {
+            detailImageViewController.gifGiphy = self.arrayGifGiphy[row - 1]
+            if detailImageViewController.gifGiphy?.originImage == nil {
                 self.loadingQueue.async {
-                    let imgUrl = URL(string: detailImageViewController.gif!.originUrl!)
-                    let data = NSData(contentsOf: imgUrl!)
-                    detailImageViewController.gif?.originImage = data
-                    do {
-                        try detailImageViewController.gif?.managedObjectContext?.save()
-
-                    } catch let error as NSError {
-                        print("Could not save. \(error), \(error.userInfo)")
+                    let imgUrl = URL(string: detailImageViewController.gifGiphy!.originUrl)
+                    guard let data = NSData(contentsOf: imgUrl!) else {
+                        print("Can't download imgUrl: \(imgUrl)")
+                        return
                     }
+                    if let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                        let imagePath = documentDirectoryURL.appendingPathComponent("\(detailImageViewController.gifGiphy!.id)_max")
+                        do {
+                            try data.write(to: imagePath)
+                            print("Saving: \(imagePath)")
+                        } catch {
+                            fatalError("Can't write image \(error)")
+                        }
+                    }
+                    detailImageViewController.gifGiphy?.originImage = UIImage.gif(data: data as Data)
                     DispatchQueue.main.async {
                         detailImageViewController.reloadOriginalImage()
                         print("OriginImage downloaded: Reloading")
