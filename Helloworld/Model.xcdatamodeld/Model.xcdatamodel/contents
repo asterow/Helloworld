@@ -2,10 +2,12 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Gif" representedClassName="Gif" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="minUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="originUrl" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Gif" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Gif" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>

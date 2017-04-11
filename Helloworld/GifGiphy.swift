@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 class GifGiphy {
     let minUrl : String
@@ -17,6 +18,8 @@ class GifGiphy {
     var minNSDataImage: NSData?
     var originImage: UIImage?
     var originNSDataImage: NSData?
+    var mapImage: UIImage?
+    var location: CLLocationCoordinate2D?
     var gif: Gif?
     
     init(id: String, minUrl: String, originUrl: String) {
@@ -30,6 +33,10 @@ class GifGiphy {
         self.minUrl = gif.minUrl!
         self.originUrl = gif.originUrl!
         self.gif = gif
+        if gif.latitude != 0, gif.longitude != 0 {
+            self.location = CLLocationCoordinate2D(latitude: gif.latitude, longitude: gif.longitude)
+            print("init Giphy: location = \(self.location)")
+        }
         loadGIF()
     }
     

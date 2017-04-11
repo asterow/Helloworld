@@ -33,6 +33,9 @@
 		019BCD091E82A77F00EF4459 /* Tables.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 019BCD081E82A77F00EF4459 /* Tables.storyboard */; };
 		019BCD0B1E82ADE800EF4459 /* DynamiqueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019BCD0A1E82ADE800EF4459 /* DynamiqueTableViewController.swift */; };
 		019E47291E86972000748FE6 /* Swift+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019E47281E86972000748FE6 /* Swift+Gif.swift */; };
+		01D185F21E9CC1B600405BC4 /* EditPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D185F11E9CC1B600405BC4 /* EditPreferencesViewController.swift */; };
+		01D185F51E9CC2EE00405BC4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D185F41E9CC2EE00405BC4 /* MapKit.framework */; };
+		01D185F71E9D17BD00405BC4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D185F61E9D17BD00405BC4 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +69,9 @@
 		019E47281E86972000748FE6 /* Swift+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift+Gif.swift"; sourceTree = "<group>"; };
 		01D185E71E9BBAF400405BC4 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		01D185E81E9BBAF400405BC4 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		01D185F11E9CC1B600405BC4 /* EditPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPreferencesViewController.swift; sourceTree = "<group>"; };
+		01D185F41E9CC2EE00405BC4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		01D185F61E9D17BD00405BC4 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01D185F51E9CC2EE00405BC4 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +94,8 @@
 				013F83B41E84244500F2A84E /* DetailImageViewController.swift */,
 				019E47281E86972000748FE6 /* Swift+Gif.swift */,
 				016539BE1E979AC300C86AB7 /* CoreDataGif.swift */,
+				01D185F11E9CC1B600405BC4 /* EditPreferencesViewController.swift */,
+				01D185F61E9D17BD00405BC4 /* MapViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -171,6 +180,7 @@
 			children = (
 				0146E9881E7FE630006238AF /* Helloworld */,
 				0146E9871E7FE630006238AF /* Products */,
+				01D185F31E9CC2ED00405BC4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -199,6 +209,14 @@
 				019BCD001E8175BB00EF4459 /* HelloViewController.swift */,
 			);
 			path = Helloworld;
+			sourceTree = "<group>";
+		};
+		01D185F31E9CC2ED00405BC4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01D185F41E9CC2EE00405BC4 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +253,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = RP7D6ER63X;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -282,6 +305,7 @@
 				013A00831E8CF07B00A90D2A /* GifGiphy.swift in Sources */,
 				016539BF1E979AC300C86AB7 /* CoreDataGif.swift in Sources */,
 				019BCD051E82888600EF4459 /* ModalTestViewController.swift in Sources */,
+				01D185F71E9D17BD00405BC4 /* MapViewController.swift in Sources */,
 				019BCD011E8175BB00EF4459 /* HelloViewController.swift in Sources */,
 				0146E98C1E7FE630006238AF /* ViewController.swift in Sources */,
 				013F83B51E84244500F2A84E /* DetailImageViewController.swift in Sources */,
@@ -294,6 +318,7 @@
 				013F83B11E84144500F2A84E /* ImageGalleryCollectionViewController.swift in Sources */,
 				019BCD071E828AAB00EF4459 /* ModalImageViewController.swift in Sources */,
 				0183E9321E82CD6F003A3F7F /* quoteDetailViewController.swift in Sources */,
+				01D185F21E9CC1B600405BC4 /* EditPreferencesViewController.swift in Sources */,
 				0183E92E1E82B91C003A3F7F /* Quote.swift in Sources */,
 				0146E98A1E7FE630006238AF /* AppDelegate.swift in Sources */,
 				013F83B31E8414ED00F2A84E /* ImageGalleryCollectionViewCell.swift in Sources */,

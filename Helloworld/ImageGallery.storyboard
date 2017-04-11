@@ -116,7 +116,14 @@
                             <outlet property="delegate" destination="vlm-aS-ETT" id="DEW-lD-sMC"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="89u-Le-sRD"/>
+                    <navigationItem key="navigationItem" id="89u-Le-sRD">
+                        <barButtonItem key="leftBarButtonItem" systemItem="compose" id="nBa-rw-nv8"/>
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="coG-F0-cuU">
+                            <connections>
+                                <segue destination="tgp-2S-Ajj" kind="show" identifier="mapSegue" id="rke-XT-cfe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WUY-mr-RHz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -185,6 +192,38 @@
             </objects>
             <point key="canvasLocation" x="879.20000000000005" y="808.24587706146929"/>
         </scene>
+        <!--Map View Controller-->
+        <scene sceneID="uYC-mC-81g">
+            <objects>
+                <viewController id="tgp-2S-Ajj" customClass="MapViewController" customModule="Helloworld" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2QA-WW-523"/>
+                        <viewControllerLayoutGuide type="bottom" id="gRL-fj-xMM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gq8-81-lPQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="YJA-D5-3NK">
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YJA-D5-3NK" firstAttribute="leading" secondItem="gq8-81-lPQ" secondAttribute="leading" id="34F-N9-o7J"/>
+                            <constraint firstItem="gRL-fj-xMM" firstAttribute="top" secondItem="YJA-D5-3NK" secondAttribute="bottom" id="oKz-Hj-hB6"/>
+                            <constraint firstAttribute="trailing" secondItem="YJA-D5-3NK" secondAttribute="trailing" id="tHS-rK-3dl"/>
+                            <constraint firstItem="YJA-D5-3NK" firstAttribute="top" secondItem="2QA-WW-523" secondAttribute="bottom" id="u9l-mt-8fB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="YJA-D5-3NK" id="e8p-PT-9HZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C5K-4C-kfT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2601" y="-618"/>
+        </scene>
         <!--Detail Image View Controller-->
         <scene sceneID="Akk-dJ-p8e">
             <objects>
@@ -230,7 +269,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1695" y="99"/>
+            <point key="canvasLocation" x="2601.449275362319" y="98.641304347826093"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0ft-bL-DoJ">

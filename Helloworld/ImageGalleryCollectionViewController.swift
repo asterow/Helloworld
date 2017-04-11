@@ -8,57 +8,47 @@
 
 import UIKit
 import CoreData
+import CoreLocation
+//import MapKit
+
 
 private let reuseIdentifier = "imageCell"
 
-class ImageGalleryCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
-
+class ImageGalleryCollectionViewController: UICollectionViewController {
     
-
-    var arrayGif = [Gif]()
+    
+    
     var arrayGifGiphy = [GifGiphy]()
     
     var firstCell: SearchImageCollectionViewCell? = nil
+    var lastLocation: CLLocationCoordinate2D? = nil
+    
     let loadingQueue = DispatchQueue(label: "com.astero.queue.loadingQueue", qos: .userInteractive)
     let gifService = GiphyService()
-
-    var coreDataGif = CoreDataGif()
-   
     
+    var coreDataGif = CoreDataGif()
+    
+    let locationManager = CLLocationManager()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-        lpgr.minimumPressDuration = 0.5
-        lpgr.delaysTouchesBegan = true
-        lpgr.delegate = self
-        self.collectionView?.addGestureRecognizer(lpgr)
+        
+        
         
         DispatchQueue.main.async {
+            self.addLongPressGestureToDeleteGif()
+
             guard let arrayGif = self.coreDataGif.fetchGif() else {
                 return
             }
-            self.arrayGif = arrayGif
             
-            for gif in self.arrayGif {
+            for gif in arrayGif {
                 let gifGiphy = GifGiphy(gif: gif)
                 self.arrayGifGiphy.append(gifGiphy)
             }
-//            if let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-//                for gif in self.arrayGif {
-//                    let imagePath = documentDirectoryURL.appendingPathComponent("\(gif.id!)_min")
-//                    do {
-//                        try gif.minImage?.write(to: imagePath)
-//                        print("Saving: \(imagePath)")
-//                    } catch {
-//                        fatalError("Can't write image \(error)")
-//                    }
-//                    
-//                }
-//            }
-//            print("Saving DONE !")
             
             if self.arrayGifGiphy.count > 0 {
                 var indexes = [IndexPath]()
@@ -67,136 +57,79 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
                 }
                 self.collectionView?.insertItems(at: indexes)
             }
+            self.startLocationManager()
         }
         
         
-//        for gif in arrayGifEntity {
-//            
-//        }
-
-//        for i in 0 ..< 1000 {
-//            print("iteration: \(i)")
-//            onClickGifButton()
-//        }
-   
-//        let queue1 = DispatchQueue(label: "com.astero.maqueue.1", qos: .background)
-//        let queue2 = DispatchQueue(label: "com.astero.maqueue.2", qos: .utility)
-//        
-//        queue2.async {
-//            for i in 0..<100 {
-//                print("2 - \(i)")
-//            }
-//        }
-//        queue1.async {
-//            for i in 0..<1000 {
-//                print("1 - \(i)")
-//            }
-//
-//        }
-//        queue1.async {
-//            for i in 0..<1000 {
-//                print("1.1 - \(i)")
-//            }
-//            task.resume()
-//            
-//        }
-//        DispatchQueue.main.async {
-//            print("lol")
-//        }
+        //        for gif in arrayGifEntity {
+        //
+        //        }
         
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "POST"
-//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        let body = "{\"name\":\"tata\",\"desc\":\"tata Desc\"}"
-////        let body = "name=toto&desc=totoDesc"
-//
-//        request.httpBody = body.data(using: String.Encoding.utf8)
-//        let postTask = session.dataTask(with: request, completionHandler: {
-//            (data, response, error) in
-//            guard error == nil else {
-//                print(error.debugDescription)
-//                return
-//            }
-//        })
+        //        for i in 0 ..< 1000 {
+        //            print("iteration: \(i)")
+        //            onClickGifButton()
+        //        }
+        
+        //        let queue1 = DispatchQueue(label: "com.astero.maqueue.1", qos: .background)
+        //        let queue2 = DispatchQueue(label: "com.astero.maqueue.2", qos: .utility)
+        //
+        //        queue2.async {
+        //            for i in 0..<100 {
+        //                print("2 - \(i)")
+        //            }
+        //        }
+        //        queue1.async {
+        //            for i in 0..<1000 {
+        //                print("1 - \(i)")
+        //            }
+        //
+        //        }
+        //        queue1.async {
+        //            for i in 0..<1000 {
+        //                print("1.1 - \(i)")
+        //            }
+        //            task.resume()
+        //
+        //        }
+        //        DispatchQueue.main.async {
+        //            print("lol")
+        //        }
+        
+        //        var request = URLRequest(url: url)
+        //        request.httpMethod = "POST"
+        //        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        //        let body = "{\"name\":\"tata\",\"desc\":\"tata Desc\"}"
+        ////        let body = "name=toto&desc=totoDesc"
+        //
+        //        request.httpBody = body.data(using: String.Encoding.utf8)
+        //        let postTask = session.dataTask(with: request, completionHandler: {
+        //            (data, response, error) in
+        //            guard error == nil else {
+        //                print(error.debugDescription)
+        //                return
+        //            }
+        //        })
         
         
-//        postTask.resume()
+        //        postTask.resume()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Register cell classes
         //self.collectionView!.register(SearchImageCollectionViewCell.self, forCellWithReuseIdentifier: "firstCell")
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         print("didReceiveMemoryWarning WARNIIIIINNNNNG !!!!")
         // Dispose of any resources that can be recreated.
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
     
-    func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
-        if gestureReconizer.state != .began {
-            return
-        }
-        
-        let p = gestureReconizer.location(in: self.collectionView)
-        let indexPath = self.collectionView?.indexPathForItem(at: p)
-        
-        if let index = indexPath, index.row != 0 {
-//            var cell = self.collectionView?.cellForItem(at: index)
-            print(index.row)
-            let alertController = UIAlertController(title: nil, message: "Delete this GIF ?", preferredStyle: .actionSheet)
-            alertController.popoverPresentationController?.sourceView = collectionView
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
-            }
-            alertController.addAction(cancelAction)
-            
-            
-            
-            let destroyAction = UIAlertAction(title: "Delete", style: .destructive) { action in
-                guard let gif = self.arrayGifGiphy[index.row - 1].gif else {
-                    print("gif is nil before delete")
-                    return
-                }
-                if self.coreDataGif.deleteGif(gif: gif) {
-//                    self.arrayGif.remove(at: index.row - 1)
-                    self.arrayGifGiphy.remove(at: index.row - 1)
-                    DispatchQueue.main.async {
-                        var indexPaths = [IndexPath]()
-                        indexPaths.append(index)
-                        self.collectionView?.deleteItems(at: indexPaths)
-                    }
-                }
-                //print(action)
-            }
-            alertController.addAction(destroyAction)
-            
-            //DispatchQueue.main.async {
-                self.present(alertController, animated: true) {
-                    // ...
-                }
-            //}
-            
-            
-        } else {
-            print("Could not find index path")
-        }
-    }
-
+    
+    
+    
     func changeNavTitle(_ title: String?) {
         DispatchQueue.main.async {
             guard let title = title else {
@@ -216,7 +149,6 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
                 //            DispatchQueue.global().async{
                 guard let gifGiphy = gifGiphy else {
                     self.changeNavTitle("No internet connexion")
-                    
                     return
                 }
                 guard let imgUrl = URL(string: gifGiphy.minUrl) else {
@@ -243,25 +175,20 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
         }
         
     }
-
-
+    
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
-
+    
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return arrayGifGiphy.count + 1
     }
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        guard let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else {
-            return
-        }
-        flowLayout.invalidateLayout()
-    }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == 0 {
@@ -288,6 +215,13 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
                     if gif.id == gifGiphy.id {
                         return
                     }
+                }
+//                guard let location = self.lastLocation else {
+//                    print("location is nil")
+//                    return
+//                }
+                if let location = self.lastLocation {
+                    gifGiphy.location = location
                 }
                 guard self.coreDataGif.add(gifGiphy: gifGiphy) else {
                     print("coreDataGif.add return false")
@@ -356,39 +290,114 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
                     }
                 }
             }
-
+            
+        }
+        else if segue.identifier == "mapSegue" {
+            guard let mapViewController = segue.destination as? MapViewController else {
+                print("Cant cast segue.destination to MapViewController")
+                return
+            }
+            mapViewController.arrayGifGiphy = arrayGifGiphy.filter { $0.location != nil }
+            print("mapSegue")
         }
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
-    }
-    */
-
 }
+
+
+extension ImageGalleryCollectionViewController: UIGestureRecognizerDelegate {
+    
+    func addLongPressGestureToDeleteGif() {
+        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        lpgr.minimumPressDuration = 0.5
+        lpgr.delaysTouchesBegan = true
+        lpgr.delegate = self
+        self.collectionView?.addGestureRecognizer(lpgr)
+    }
+    
+    
+    func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
+        if gestureReconizer.state != .began {
+            return
+        }
+        
+        let p = gestureReconizer.location(in: self.collectionView)
+        let indexPath = self.collectionView?.indexPathForItem(at: p)
+        
+        if let index = indexPath, index.row != 0 {
+            //            var cell = self.collectionView?.cellForItem(at: index)
+            print(index.row)
+            let alertController = UIAlertController(title: nil, message: "Delete this GIF ?", preferredStyle: .actionSheet)
+            alertController.popoverPresentationController?.sourceView = collectionView
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+            }
+            alertController.addAction(cancelAction)
+            
+            
+            
+            let destroyAction = UIAlertAction(title: "Delete", style: .destructive) { action in
+                guard let gif = self.arrayGifGiphy[index.row - 1].gif else {
+                    print("gif is nil before delete")
+                    return
+                }
+                if self.coreDataGif.deleteGif(gif: gif) {
+                    //                    self.arrayGif.remove(at: index.row - 1)
+                    self.arrayGifGiphy.remove(at: index.row - 1)
+                    DispatchQueue.main.async {
+                        var indexPaths = [IndexPath]()
+                        indexPaths.append(index)
+                        self.collectionView?.deleteItems(at: indexPaths)
+                    }
+                }
+                //print(action)
+            }
+            alertController.addAction(destroyAction)
+            
+            //DispatchQueue.main.async {
+            self.present(alertController, animated: true) {
+                // ...
+            }
+            //}
+            
+            
+        } else {
+            print("Could not find index path")
+        }
+    }
+}
+
+extension ImageGalleryCollectionViewController: CLLocationManagerDelegate {
+    func startLocationManager() {
+        self.locationManager.requestAlwaysAuthorization()
+        
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            print("locationServices: Enabled - desiredAccuracy: \(locationManager.desiredAccuracy)")
+            self.locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            self.locationManager.startUpdatingLocation()
+        }
+
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        self.lastLocation = locValue
+//        print("locations = \(locValue.latitude) \(locValue.longitude)")
+    }
+}
+
+
+extension ImageGalleryCollectionViewController: UICollectionViewDelegateFlowLayout {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        guard let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        flowLayout.invalidateLayout()
+    }
+    
+}
+
+

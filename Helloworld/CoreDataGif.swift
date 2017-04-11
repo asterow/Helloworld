@@ -41,6 +41,11 @@ class CoreDataGif {
         //gif.minImage = gifGiphy.minNSDataImage
         gif.originUrl = gifGiphy.originUrl
         
+        if let location = gifGiphy.location {
+            gif.latitude = location.latitude
+            gif.longitude = location.longitude
+        }
+        
         if let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             let imagePath = documentDirectoryURL.appendingPathComponent("\(gif.id!)_min")
             do {
