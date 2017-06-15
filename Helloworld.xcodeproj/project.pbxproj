@@ -33,9 +33,9 @@
 		019BCD091E82A77F00EF4459 /* Tables.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 019BCD081E82A77F00EF4459 /* Tables.storyboard */; };
 		019BCD0B1E82ADE800EF4459 /* DynamiqueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019BCD0A1E82ADE800EF4459 /* DynamiqueTableViewController.swift */; };
 		019E47291E86972000748FE6 /* Swift+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019E47281E86972000748FE6 /* Swift+Gif.swift */; };
-		01D185F21E9CC1B600405BC4 /* EditPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D185F11E9CC1B600405BC4 /* EditPreferencesViewController.swift */; };
 		01D185F51E9CC2EE00405BC4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D185F41E9CC2EE00405BC4 /* MapKit.framework */; };
 		01D185F71E9D17BD00405BC4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D185F61E9D17BD00405BC4 /* MapViewController.swift */; };
+		3DADD3811EF1777600AC6BD8 /* NotifSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DADD3801EF1777600AC6BD8 /* NotifSample.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,9 +69,12 @@
 		019E47281E86972000748FE6 /* Swift+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift+Gif.swift"; sourceTree = "<group>"; };
 		01D185E71E9BBAF400405BC4 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		01D185E81E9BBAF400405BC4 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		01D185F11E9CC1B600405BC4 /* EditPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPreferencesViewController.swift; sourceTree = "<group>"; };
 		01D185F41E9CC2EE00405BC4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		01D185F61E9D17BD00405BC4 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		3DADD37F1EF1777500AC6BD8 /* Helloworld-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Helloworld-Bridging-Header.h"; sourceTree = "<group>"; };
+		3DADD3801EF1777600AC6BD8 /* NotifSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifSample.m; sourceTree = "<group>"; };
+		3DADD3821EF1785400AC6BD8 /* NotifSample.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotifSample.h; sourceTree = "<group>"; };
+		3DADD3841EF2876D00AC6BD8 /* Helloworld.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Helloworld.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +97,6 @@
 				013F83B41E84244500F2A84E /* DetailImageViewController.swift */,
 				019E47281E86972000748FE6 /* Swift+Gif.swift */,
 				016539BE1E979AC300C86AB7 /* CoreDataGif.swift */,
-				01D185F11E9CC1B600405BC4 /* EditPreferencesViewController.swift */,
 				01D185F61E9D17BD00405BC4 /* MapViewController.swift */,
 			);
 			name = Controller;
@@ -195,10 +197,12 @@
 		0146E9881E7FE630006238AF /* Helloworld */ = {
 			isa = PBXGroup;
 			children = (
+				3DADD3841EF2876D00AC6BD8 /* Helloworld.entitlements */,
 				013F83AD1E84132D00F2A84E /* ImageGallery */,
 				013F83A71E83DD0700F2A84E /* Navigation */,
 				013F83A61E83DC6500F2A84E /* UiTableView */,
 				0146E9891E7FE630006238AF /* AppDelegate.swift */,
+				3DADD3831EF2760000AC6BD8 /* NotifSample */,
 				0146E98B1E7FE630006238AF /* ViewController.swift */,
 				0146E98D1E7FE630006238AF /* Main.storyboard */,
 				019BCD061E828AAB00EF4459 /* ModalImageViewController.swift */,
@@ -207,6 +211,7 @@
 				0146E9921E7FE630006238AF /* LaunchScreen.storyboard */,
 				0146E9951E7FE630006238AF /* Info.plist */,
 				019BCD001E8175BB00EF4459 /* HelloViewController.swift */,
+				3DADD37F1EF1777500AC6BD8 /* Helloworld-Bridging-Header.h */,
 			);
 			path = Helloworld;
 			sourceTree = "<group>";
@@ -217,6 +222,15 @@
 				01D185F41E9CC2EE00405BC4 /* MapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3DADD3831EF2760000AC6BD8 /* NotifSample */ = {
+			isa = PBXGroup;
+			children = (
+				3DADD3801EF1777600AC6BD8 /* NotifSample.m */,
+				3DADD3821EF1785400AC6BD8 /* NotifSample.h */,
+			);
+			name = NotifSample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,10 +265,17 @@
 				TargetAttributes = {
 					0146E9851E7FE630006238AF = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = RP7D6ER63X;
+						DevelopmentTeam = 57EE7HVFSH;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -312,13 +333,13 @@
 				019E47291E86972000748FE6 /* Swift+Gif.swift in Sources */,
 				013A007F1E89424400A90D2A /* SearchImageCollectionViewCell.swift in Sources */,
 				019BCD0B1E82ADE800EF4459 /* DynamiqueTableViewController.swift in Sources */,
+				3DADD3811EF1777600AC6BD8 /* NotifSample.m in Sources */,
 				013A00D11E962DAA00A90D2A /* Model.xcdatamodeld in Sources */,
 				013F83B91E855F6600F2A84E /* GiphyService.swift in Sources */,
 				0183E9301E82C1D1003A3F7F /* QuoteTableViewCell.swift in Sources */,
 				013F83B11E84144500F2A84E /* ImageGalleryCollectionViewController.swift in Sources */,
 				019BCD071E828AAB00EF4459 /* ModalImageViewController.swift in Sources */,
 				0183E9321E82CD6F003A3F7F /* quoteDetailViewController.swift in Sources */,
-				01D185F21E9CC1B600405BC4 /* EditPreferencesViewController.swift in Sources */,
 				0183E92E1E82B91C003A3F7F /* Quote.swift in Sources */,
 				0146E98A1E7FE630006238AF /* AppDelegate.swift in Sources */,
 				013F83B31E8414ED00F2A84E /* ImageGalleryCollectionViewCell.swift in Sources */,
@@ -448,13 +469,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Helloworld/Helloworld.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = RP7D6ER63X;
+				DEVELOPMENT_TEAM = 57EE7HVFSH;
 				INFOPLIST_FILE = Helloworld/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.astero.Helloworld;
+				PRODUCT_BUNDLE_IDENTIFIER = com.logicimmo.FTtestAPNS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Helloworld/Helloworld-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -464,13 +489,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Helloworld/Helloworld.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = RP7D6ER63X;
+				DEVELOPMENT_TEAM = 57EE7HVFSH;
 				INFOPLIST_FILE = Helloworld/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.astero.Helloworld;
+				PRODUCT_BUNDLE_IDENTIFIER = com.logicimmo.FTtestAPNS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Helloworld/Helloworld-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

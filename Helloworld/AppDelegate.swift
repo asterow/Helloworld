@@ -29,8 +29,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        let notifSample = NotifSample()
+        notifSample.sayHi()
+        notifSample.requestPushPermission()
+        notifSample.setCustomActions()
+        
+        // Configure the user interactions first.
+        //self.configureUserInteractions()
+        
+        
+        // Register with APNs
+        UIApplication.shared.registerForRemoteNotifications()
+
+        
         return true
     }
+    
+    // is called when : [app is in BG and notif's payload contains "content-available" : 1 ] or [app is in FG and notif is received]
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        completionHandler(.newData)
+        print("Notif received !!! :)")
+    }
+    
+    
+    
+    // Handle remote notification registration.
+    func application(_ application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
+        // Forward the token to your provider, using a custom method.
+        //self.enableRemoteNotificationFeatures()
+        
+        let deviceTokenString = deviceToken.reduce("") {$0 + String(format: "%02X", $1)}
+        print("\nTOKEN1 = \(deviceTokenString)")
+        
+    }
+    
+    func application(_ application: UIApplication,
+                     didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        // The token is not currently available.
+        print("Remote notification support is unavailable due to error: \(error.localizedDescription)")
+        //self.disableRemoteNotificationFeatures()
+    }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
