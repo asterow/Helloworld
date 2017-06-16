@@ -35,8 +35,39 @@
 		019E47291E86972000748FE6 /* Swift+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019E47281E86972000748FE6 /* Swift+Gif.swift */; };
 		01D185F51E9CC2EE00405BC4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D185F41E9CC2EE00405BC4 /* MapKit.framework */; };
 		01D185F71E9D17BD00405BC4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D185F61E9D17BD00405BC4 /* MapViewController.swift */; };
+		3DADC50C1EF40FB5002933CC /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DADC50B1EF40FB5002933CC /* UserNotifications.framework */; };
+		3DADC50E1EF40FB5002933CC /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DADC50D1EF40FB5002933CC /* UserNotificationsUI.framework */; };
+		3DADC5111EF40FB5002933CC /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC5101EF40FB5002933CC /* NotificationViewController.swift */; };
+		3DADC5141EF40FB5002933CC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DADC5121EF40FB5002933CC /* MainInterface.storyboard */; };
+		3DADC5181EF40FB5002933CC /* myContentExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3DADC50A1EF40FB5002933CC /* myContentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3DADC51E1EF428C1002933CC /* LicomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC51D1EF428C1002933CC /* LicomTableViewCell.swift */; };
+		3DADC51F1EF428C1002933CC /* LicomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC51D1EF428C1002933CC /* LicomTableViewCell.swift */; };
 		3DADD3811EF1777600AC6BD8 /* NotifSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DADD3801EF1777600AC6BD8 /* NotifSample.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3DADC5161EF40FB5002933CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0146E97E1E7FE630006238AF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3DADC5091EF40FB5002933CC;
+			remoteInfo = myContentExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3DADC51C1EF40FB5002933CC /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				3DADC5181EF40FB5002933CC /* myContentExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		013A007E1E89424400A90D2A /* SearchImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -71,6 +102,13 @@
 		01D185E81E9BBAF400405BC4 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		01D185F41E9CC2EE00405BC4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		01D185F61E9D17BD00405BC4 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		3DADC50A1EF40FB5002933CC /* myContentExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = myContentExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DADC50B1EF40FB5002933CC /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		3DADC50D1EF40FB5002933CC /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		3DADC5101EF40FB5002933CC /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		3DADC5131EF40FB5002933CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		3DADC5151EF40FB5002933CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DADC51D1EF428C1002933CC /* LicomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicomTableViewCell.swift; sourceTree = "<group>"; };
 		3DADD37F1EF1777500AC6BD8 /* Helloworld-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Helloworld-Bridging-Header.h"; sourceTree = "<group>"; };
 		3DADD3801EF1777600AC6BD8 /* NotifSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifSample.m; sourceTree = "<group>"; };
 		3DADD3821EF1785400AC6BD8 /* NotifSample.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotifSample.h; sourceTree = "<group>"; };
@@ -83,6 +121,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				01D185F51E9CC2EE00405BC4 /* MapKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DADC5071EF40FB5002933CC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DADC50E1EF40FB5002933CC /* UserNotificationsUI.framework in Frameworks */,
+				3DADC50C1EF40FB5002933CC /* UserNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				0146E9881E7FE630006238AF /* Helloworld */,
+				3DADC50F1EF40FB5002933CC /* myContentExtension */,
 				0146E9871E7FE630006238AF /* Products */,
 				01D185F31E9CC2ED00405BC4 /* Frameworks */,
 			);
@@ -190,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				0146E9861E7FE630006238AF /* Helloworld.app */,
+				3DADC50A1EF40FB5002933CC /* myContentExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -220,8 +269,21 @@
 			isa = PBXGroup;
 			children = (
 				01D185F41E9CC2EE00405BC4 /* MapKit.framework */,
+				3DADC50B1EF40FB5002933CC /* UserNotifications.framework */,
+				3DADC50D1EF40FB5002933CC /* UserNotificationsUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3DADC50F1EF40FB5002933CC /* myContentExtension */ = {
+			isa = PBXGroup;
+			children = (
+				3DADC5101EF40FB5002933CC /* NotificationViewController.swift */,
+				3DADC5121EF40FB5002933CC /* MainInterface.storyboard */,
+				3DADC51D1EF428C1002933CC /* LicomTableViewCell.swift */,
+				3DADC5151EF40FB5002933CC /* Info.plist */,
+			);
+			path = myContentExtension;
 			sourceTree = "<group>";
 		};
 		3DADD3831EF2760000AC6BD8 /* NotifSample */ = {
@@ -243,15 +305,34 @@
 				0146E9821E7FE630006238AF /* Sources */,
 				0146E9831E7FE630006238AF /* Frameworks */,
 				0146E9841E7FE630006238AF /* Resources */,
+				3DADC51C1EF40FB5002933CC /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3DADC5171EF40FB5002933CC /* PBXTargetDependency */,
 			);
 			name = Helloworld;
 			productName = Helloworld;
 			productReference = 0146E9861E7FE630006238AF /* Helloworld.app */;
 			productType = "com.apple.product-type.application";
+		};
+		3DADC5091EF40FB5002933CC /* myContentExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DADC51B1EF40FB5002933CC /* Build configuration list for PBXNativeTarget "myContentExtension" */;
+			buildPhases = (
+				3DADC5061EF40FB5002933CC /* Sources */,
+				3DADC5071EF40FB5002933CC /* Frameworks */,
+				3DADC5081EF40FB5002933CC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = myContentExtension;
+			productName = myContentExtension;
+			productReference = 3DADC50A1EF40FB5002933CC /* myContentExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -259,7 +340,7 @@
 		0146E97E1E7FE630006238AF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Astero;
 				TargetAttributes = {
@@ -280,6 +361,11 @@
 							};
 						};
 					};
+					3DADC5091EF40FB5002933CC = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 57EE7HVFSH;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 0146E9811E7FE630006238AF /* Build configuration list for PBXProject "Helloworld" */;
@@ -296,6 +382,7 @@
 			projectRoot = "";
 			targets = (
 				0146E9851E7FE630006238AF /* Helloworld */,
+				3DADC5091EF40FB5002933CC /* myContentExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -313,6 +400,14 @@
 				0146E9911E7FE630006238AF /* Assets.xcassets in Resources */,
 				0146E98F1E7FE630006238AF /* Main.storyboard in Resources */,
 				013F83AC1E83DF1300F2A84E /* quotes.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DADC5081EF40FB5002933CC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DADC5141EF40FB5002933CC /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +432,7 @@
 				013A00D11E962DAA00A90D2A /* Model.xcdatamodeld in Sources */,
 				013F83B91E855F6600F2A84E /* GiphyService.swift in Sources */,
 				0183E9301E82C1D1003A3F7F /* QuoteTableViewCell.swift in Sources */,
+				3DADC51E1EF428C1002933CC /* LicomTableViewCell.swift in Sources */,
 				013F83B11E84144500F2A84E /* ImageGalleryCollectionViewController.swift in Sources */,
 				019BCD071E828AAB00EF4459 /* ModalImageViewController.swift in Sources */,
 				0183E9321E82CD6F003A3F7F /* quoteDetailViewController.swift in Sources */,
@@ -346,7 +442,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3DADC5061EF40FB5002933CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DADC51F1EF428C1002933CC /* LicomTableViewCell.swift in Sources */,
+				3DADC5111EF40FB5002933CC /* NotificationViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3DADC5171EF40FB5002933CC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3DADC5091EF40FB5002933CC /* myContentExtension */;
+			targetProxy = 3DADC5161EF40FB5002933CC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0146E98D1E7FE630006238AF /* Main.storyboard */ = {
@@ -365,6 +478,14 @@
 				01D185E81E9BBAF400405BC4 /* fr */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3DADC5121EF40FB5002933CC /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3DADC5131EF40FB5002933CC /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -468,6 +589,7 @@
 		0146E9991E7FE630006238AF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Helloworld/Helloworld.entitlements;
@@ -488,6 +610,7 @@
 		0146E99A1E7FE630006238AF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Helloworld/Helloworld.entitlements;
@@ -501,6 +624,36 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Helloworld/Helloworld-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3DADC5191EF40FB5002933CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = 57EE7HVFSH;
+				INFOPLIST_FILE = myContentExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.logicimmo.FTtestAPNS.myContentExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		3DADC51A1EF40FB5002933CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = 57EE7HVFSH;
+				INFOPLIST_FILE = myContentExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.logicimmo.FTtestAPNS.myContentExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -524,6 +677,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		3DADC51B1EF40FB5002933CC /* Build configuration list for PBXNativeTarget "myContentExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DADC5191EF40FB5002933CC /* Debug */,
+				3DADC51A1EF40FB5002933CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 
