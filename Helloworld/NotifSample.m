@@ -64,10 +64,26 @@
                                                intentIdentifiers:@[]
                                                options:UNNotificationCategoryOptionNone];
     
+    UNNotificationAction* contact = [UNNotificationAction
+                                          actionWithIdentifier:@"CONTACT_ACTION"
+                                          title:@"Contacter"
+                                          options:UNNotificationActionOptionNone];
+    
+    UNNotificationAction* details = [UNNotificationAction
+                                        actionWithIdentifier:@"DETAIL_ACTION"
+                                        title:@"Voir le programme"
+                                        options:UNNotificationActionOptionForeground];
+    
+    // Create the category with the custom actions.
+    UNNotificationCategory* limmoCategory = [UNNotificationCategory
+                                               categoryWithIdentifier:@"LIMMO_CATEGORY"
+                                               actions:@[contact, details]
+                                               intentIdentifiers:@[]
+                                               options:UNNotificationCategoryOptionNone];
+    
     // Register the notification categories.
     UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
-    [center setNotificationCategories:[NSSet setWithObjects:generalCategory, expiredCategory,
-                                       nil]];
+    [center setNotificationCategories:[NSSet setWithObjects:generalCategory, expiredCategory, limmoCategory, nil]];
 
 }
 

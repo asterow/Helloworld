@@ -62,7 +62,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //self.enableRemoteNotificationFeatures()
         
         let deviceTokenString = deviceToken.reduce("") {$0 + String(format: "%02X", $1)}
+        let pushToken = String(format: "%@", deviceToken as CVarArg)
         print("\nTOKEN1 = \(deviceTokenString)")
+        print("\nTOKENBis = \(pushToken)")
+
         
     }
     
