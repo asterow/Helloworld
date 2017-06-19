@@ -23,15 +23,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="380"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bEk-N2-FZc">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bEk-N2-FZc">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="380"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LicomTableViewCell" rowHeight="80" id="W9l-M2-Zbt" customClass="LicomTableViewCell" customModule="myContentExtension" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="licomTableViewCell" rowHeight="80" id="W9l-M2-Zbt" customClass="LicomTableViewCell" customModule="myContentExtension" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W9l-M2-Zbt" id="TZI-WK-O7B">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="xqf-jt-TcW">
@@ -68,7 +68,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 pièces" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUs-RI-tvo">
-                                                            <rect key="frame" x="63" y="61.333333333333329" width="147" height="14.333333333333329"/>
+                                                            <rect key="frame" x="63" y="62.333333333333329" width="147" height="13.333333333333343"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -104,8 +104,20 @@
                                                 <constraint firstItem="ZF1-yZ-Abx" firstAttribute="leading" secondItem="xqf-jt-TcW" secondAttribute="trailing" constant="5" id="p1c-5a-wlW"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cellImageView" destination="xqf-jt-TcW" id="yjJ-dB-s6v"/>
+                                            <outlet property="locationLabel" destination="QhK-xU-w1n" id="Tef-8N-PIJ"/>
+                                            <outlet property="priceLabel" destination="qeN-uG-MQU" id="Hfa-27-w96"/>
+                                            <outlet property="roomLabel" destination="zUs-RI-tvo" id="Pkg-M6-pOu"/>
+                                            <outlet property="surfaceLabel" destination="HUv-32-9QI" id="RHb-E7-aYj"/>
+                                            <outlet property="typeLabel" destination="0e7-TU-BZJ" id="4oz-Ag-SEf"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="M4Y-Lb-cyx" id="qQJ-9p-ucW"/>
+                                    <outlet property="delegate" destination="M4Y-Lb-cyx" id="jEX-74-ry0"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.45882353186607361" green="0.74901962280273438" blue="0.66666668653488159" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

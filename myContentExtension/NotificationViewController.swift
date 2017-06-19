@@ -10,7 +10,8 @@ import UIKit
 import UserNotifications
 import UserNotificationsUI
 
-class NotificationViewController: UIViewController, UNNotificationContentExtension {
+
+class NotificationViewController: UIViewController, UNNotificationContentExtension, UITableViewDataSource, UITableViewDelegate {
     
 //    @IBOutlet var tableView: UITableView?
     //@IBOutlet var label: UILabel?
@@ -19,7 +20,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad !")
-
+//        tableView.rowHeight = UITableViewAutomaticDimension
         // Do any required interface initialization here.
     }
     
@@ -30,16 +31,34 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("numberOfRowsInSection !")
         return 5
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCellIdentifier", for: indexPath)
-        
-        cell.textLabel?.text = "YOHOOO"
-        cell.textLabel?.textColor = UIColor.white
-        
-        return cell
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return CGFloat.ini
+//        return CGSize.init(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
+//
+//    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "licomTableViewCell", for: indexPath) as? LicomTableViewCell
+        {
+            cell.cellImageView.image = UIImage(named: "Image")
+            cell.priceLabel.text = "1200 E"
+            cell.locationLabel.text = "PARIS 12E (75012)"
+            cell.typeLabel.text = "Appartement"
+            cell.surfaceLabel.text  = "45m2"
+            cell.roomLabel.text = "2 pièces"
+            print("return cell !")
+            return cell
+        }
+
+//        cell.textLabel?.text = "YOHOOO"
+//        cell.textLabel?.textColor = UIColor.white
+        print("return UITableViewCell() !")
+
+        return UITableViewCell()
     }
     
     
@@ -61,3 +80,4 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
 //    }
     
 }
+

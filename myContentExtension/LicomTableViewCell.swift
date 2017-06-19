@@ -10,6 +10,14 @@ import UIKit
 
 class LicomTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var cellImageView: UIImageView!
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var surfaceLabel: UILabel!
+    @IBOutlet weak var roomLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
