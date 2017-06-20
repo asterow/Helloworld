@@ -76,7 +76,7 @@
     
     // Create the category with the custom actions.
     UNNotificationCategory* limmoCategory = [UNNotificationCategory
-                                               categoryWithIdentifier:@"LIMMO_CATEGORY"
+                                               categoryWithIdentifier:@"LICOM_CATEGORY"
                                                actions:@[contact, details]
                                                intentIdentifiers:@[]
                                                options:UNNotificationCategoryOptionNone];

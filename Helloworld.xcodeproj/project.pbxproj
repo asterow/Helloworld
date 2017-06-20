@@ -42,6 +42,8 @@
 		3DADC5181EF40FB5002933CC /* myContentExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3DADC50A1EF40FB5002933CC /* myContentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3DADC51E1EF428C1002933CC /* LicomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC51D1EF428C1002933CC /* LicomTableViewCell.swift */; };
 		3DADC51F1EF428C1002933CC /* LicomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC51D1EF428C1002933CC /* LicomTableViewCell.swift */; };
+		3DADC5271EF915EE002933CC /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC5261EF915EE002933CC /* NotificationService.swift */; };
+		3DADC52B1EF915EE002933CC /* LicomServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3DADC5241EF915EE002933CC /* LicomServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3DADD3811EF1777600AC6BD8 /* NotifSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DADD3801EF1777600AC6BD8 /* NotifSample.m */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +55,13 @@
 			remoteGlobalIDString = 3DADC5091EF40FB5002933CC;
 			remoteInfo = myContentExtension;
 		};
+		3DADC5291EF915EE002933CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0146E97E1E7FE630006238AF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3DADC5231EF915EE002933CC;
+			remoteInfo = LicomServiceExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +72,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				3DADC5181EF40FB5002933CC /* myContentExtension.appex in Embed App Extensions */,
+				3DADC52B1EF915EE002933CC /* LicomServiceExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,6 +119,9 @@
 		3DADC5131EF40FB5002933CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		3DADC5151EF40FB5002933CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DADC51D1EF428C1002933CC /* LicomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicomTableViewCell.swift; sourceTree = "<group>"; };
+		3DADC5241EF915EE002933CC /* LicomServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LicomServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DADC5261EF915EE002933CC /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		3DADC5281EF915EE002933CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DADD37F1EF1777500AC6BD8 /* Helloworld-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Helloworld-Bridging-Header.h"; sourceTree = "<group>"; };
 		3DADD3801EF1777600AC6BD8 /* NotifSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifSample.m; sourceTree = "<group>"; };
 		3DADD3821EF1785400AC6BD8 /* NotifSample.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotifSample.h; sourceTree = "<group>"; };
@@ -130,6 +143,13 @@
 			files = (
 				3DADC50E1EF40FB5002933CC /* UserNotificationsUI.framework in Frameworks */,
 				3DADC50C1EF40FB5002933CC /* UserNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DADC5211EF915EE002933CC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +249,7 @@
 			children = (
 				0146E9881E7FE630006238AF /* Helloworld */,
 				3DADC50F1EF40FB5002933CC /* myContentExtension */,
+				3DADC5251EF915EE002933CC /* LicomServiceExtension */,
 				0146E9871E7FE630006238AF /* Products */,
 				01D185F31E9CC2ED00405BC4 /* Frameworks */,
 			);
@@ -239,6 +260,7 @@
 			children = (
 				0146E9861E7FE630006238AF /* Helloworld.app */,
 				3DADC50A1EF40FB5002933CC /* myContentExtension.appex */,
+				3DADC5241EF915EE002933CC /* LicomServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -286,6 +308,15 @@
 			path = myContentExtension;
 			sourceTree = "<group>";
 		};
+		3DADC5251EF915EE002933CC /* LicomServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				3DADC5261EF915EE002933CC /* NotificationService.swift */,
+				3DADC5281EF915EE002933CC /* Info.plist */,
+			);
+			path = LicomServiceExtension;
+			sourceTree = "<group>";
+		};
 		3DADD3831EF2760000AC6BD8 /* NotifSample */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +342,7 @@
 			);
 			dependencies = (
 				3DADC5171EF40FB5002933CC /* PBXTargetDependency */,
+				3DADC52A1EF915EE002933CC /* PBXTargetDependency */,
 			);
 			name = Helloworld;
 			productName = Helloworld;
@@ -332,6 +364,23 @@
 			name = myContentExtension;
 			productName = myContentExtension;
 			productReference = 3DADC50A1EF40FB5002933CC /* myContentExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		3DADC5231EF915EE002933CC /* LicomServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DADC52C1EF915EE002933CC /* Build configuration list for PBXNativeTarget "LicomServiceExtension" */;
+			buildPhases = (
+				3DADC5201EF915EE002933CC /* Sources */,
+				3DADC5211EF915EE002933CC /* Frameworks */,
+				3DADC5221EF915EE002933CC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LicomServiceExtension;
+			productName = LicomServiceExtension;
+			productReference = 3DADC5241EF915EE002933CC /* LicomServiceExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -366,6 +415,11 @@
 						DevelopmentTeam = 57EE7HVFSH;
 						ProvisioningStyle = Automatic;
 					};
+					3DADC5231EF915EE002933CC = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 57EE7HVFSH;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 0146E9811E7FE630006238AF /* Build configuration list for PBXProject "Helloworld" */;
@@ -383,6 +437,7 @@
 			targets = (
 				0146E9851E7FE630006238AF /* Helloworld */,
 				3DADC5091EF40FB5002933CC /* myContentExtension */,
+				3DADC5231EF915EE002933CC /* LicomServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -408,6 +463,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DADC5141EF40FB5002933CC /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DADC5221EF915EE002933CC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +513,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3DADC5201EF915EE002933CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DADC5271EF915EE002933CC /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -458,6 +528,11 @@
 			isa = PBXTargetDependency;
 			target = 3DADC5091EF40FB5002933CC /* myContentExtension */;
 			targetProxy = 3DADC5161EF40FB5002933CC /* PBXContainerItemProxy */;
+		};
+		3DADC52A1EF915EE002933CC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3DADC5231EF915EE002933CC /* LicomServiceExtension */;
+			targetProxy = 3DADC5291EF915EE002933CC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -657,6 +732,36 @@
 			};
 			name = Release;
 		};
+		3DADC52D1EF915EE002933CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = 57EE7HVFSH;
+				INFOPLIST_FILE = LicomServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.logicimmo.FTtestAPNS.LicomServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		3DADC52E1EF915EE002933CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = 57EE7HVFSH;
+				INFOPLIST_FILE = LicomServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.logicimmo.FTtestAPNS.LicomServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -683,6 +788,14 @@
 			buildConfigurations = (
 				3DADC5191EF40FB5002933CC /* Debug */,
 				3DADC51A1EF40FB5002933CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		3DADC52C1EF915EE002933CC /* Build configuration list for PBXNativeTarget "LicomServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DADC52D1EF915EE002933CC /* Debug */,
+				3DADC52E1EF915EE002933CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
