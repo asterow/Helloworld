@@ -7,6 +7,8 @@
 //
 
 import UserNotifications
+import SwiftSoup
+import Alamofire
 
 class NotificationService: UNNotificationServiceExtension {
 
@@ -46,15 +48,68 @@ class NotificationService: UNNotificationServiceExtension {
                 guard let firstId = contents[0]["id"] as? String else {
                     return contentHandler(bestAttemptContent)
                 }
-                let firstUrl = URL(string: "http://www.logic-immo.com/detail-location-\(firstId).htm")
-                print("firstUrl = \(firstUrl?.absoluteString)")
-                getWebPage(url: firstUrl!, completion: {(dataString) in
-                    guard let dataString = dataString else {
-                        return
-                    }
-                    print("getWebPage complete: \(dataString)")
-                })
+                guard let firstUrl = URL(string: "http://www.logic-immo.com/detail-location-\(firstId).htm") else {
+                    return contentHandler(bestAttemptContent)
+                }
+                print("firstUrl = \(firstUrl.absoluteString)")
+//                scrapeWebPage(url: firstUrl.absoluteString)
+                
+                Alamofire.request(firstUrl.absoluteString).responseString { response in
+                    print("\(response.result.isSuccess)")
+                    if let html = response.result.value {
+                        //                self.parseHTML(html: html)
+                        //print("SCRAPED_PAGE = \(html)")
+                        do{
+                            
+                            let doc: Document = try! SwiftSoup.parse(html)
+                            let title = try! doc.select("title").text()
+                            let imageUrl = try! doc.select("#offer_pictures_main").attr("src")
+                            bestAttemptContent.body = title
+                            print("Image URL =\(imageUrl)")
+                            let imageURL = URL(string: imageUrl)
+                            self.downloadWithURL(url: imageURL!, completion: { (complete) in
+                                if complete == true {
+                                    print("true")
+                                }
+                                
+                                contentHandler(bestAttemptContent)
+                            })
+                            
+                            
+                        }catch Exception.Error(let type, let message){
+                            print(message)
+                        }catch{
+                            print("error")
+                        }
 
+                        
+                    }
+                }
+                
+                
+//                getWebPage(url: firstUrl, completion: {(dataString) in
+//                    guard let dataString = dataString else {
+//                        return
+//                    }
+////                    print("getWebPage complete: \(dataString)")
+//                    do{
+//                        
+//                        let doc: Document = try! SwiftSoup.parse(dataString)
+//                        if let linkImage = try! doc.select("title").first() {
+////                            let imageURL = try! linkImage.attr("src")
+//                            let title = try! linkImage.text()
+//                            bestAttemptContent.body = title
+//                            print("linkImageUrl = \(title)")
+//                        }
+//
+//                    }catch Exception.Error(let type, let message){
+//                        print(message)
+//                    }catch{
+//                        print("error")
+//                    }
+//                })
+
+                
                 // faire un GET sur cette url
                 
                 // parser le HTML avec SwiftSoup
@@ -66,18 +121,18 @@ class NotificationService: UNNotificationServiceExtension {
                 
                 
                 
-                guard let imageUrl = bestAttemptContent.userInfo["attachment"] as? String else {
-                    return contentHandler(bestAttemptContent)
-                }
-                let url = URL(string: imageUrl)
-                downloadWithURL(url: url!, completion: { (complete) in
-                    if complete == true {
-                        print("true")
-                    }
-                    
-                    contentHandler(bestAttemptContent)
-                })
-                print("Image URL = \(imageUrl)")
+//                guard let imageUrl = bestAttemptContent.userInfo["attachment"] as? String else {
+//                    return contentHandler(bestAttemptContent)
+//                }
+//                let url = URL(string: imageUrl)
+//                downloadWithURL(url: url!, completion: { (complete) in
+//                    if complete == true {
+//                        print("true")
+//                    }
+//                    
+//                    contentHandler(bestAttemptContent)
+//                })
+//                print("Image URL = \(imageUrl)")
             }
         }
     }
@@ -91,7 +146,25 @@ class NotificationService: UNNotificationServiceExtension {
         }
     }
     
+    private func scrapeWebPage(url: String) -> Void {
+        Alamofire.request(url).responseString { response in
+            print("\(response.result.isSuccess)")
+            if let html = response.result.value {
+//                self.parseHTML(html: html)
+                print("SCRAPED_PAGE = \(html)")
+            }
+        }
+    }
+    
     private func getWebPage(url: URL, completion: @escaping (String?) -> Void) {
+        do {
+            let directURL = try String.init(contentsOf: url, encoding: .utf8)
+            //print("directURL = \(directURL)")
+        }
+        catch let error as NSError {
+            print(error)
+        }
+//        let task = URLSession.shared.
         let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
             guard error == nil else {
                 print("getWebPage error: \(error!)" )
@@ -108,32 +181,8 @@ class NotificationService: UNNotificationServiceExtension {
                 return
             }
             completion(dataString)
+            
         }
-        
-//        let task = URLSession.shared.downloadTask(with: url) { (downloadedUrl, response, error) in
-//            
-//            guard error == nil else {
-//                completion(false)
-//                print("getWebPage error: \(error!)" )
-//                return
-//            }
-////            guard let downloadedUrl = downloadedUrl else {
-////                completion(false)
-////                return
-////            }
-//            guard let response = response else {
-//                completion(false)
-//                print("getWebPage response is nil: \(error!)" )
-//                return
-//            }
-//            
-//            print("repsonse = \n\(response)")
-//            let data = Data(
-//                response.
-////            let responseData = String(data: response, encoding: String.Encoding.utf8)
-//            completion(true)
-//            
-//        }
         task.resume()
 
     }

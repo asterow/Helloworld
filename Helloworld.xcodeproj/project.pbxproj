@@ -45,6 +45,9 @@
 		3DADC5271EF915EE002933CC /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC5261EF915EE002933CC /* NotificationService.swift */; };
 		3DADC52B1EF915EE002933CC /* LicomServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3DADC5241EF915EE002933CC /* LicomServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3DADD3811EF1777600AC6BD8 /* NotifSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DADD3801EF1777600AC6BD8 /* NotifSample.m */; };
+		9121552EFAFA4896BBCEB336 /* Pods_Helloworld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21E112F5E63F0BDCC567CF18 /* Pods_Helloworld.framework */; };
+		A0BDA3244EC041A8C62C838A /* Pods_myContentExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA310BA64E12CCE5DE9FE8B9 /* Pods_myContentExtension.framework */; };
+		CAFE8D8C2570BF969DF1747F /* Pods_LicomServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63A18949B5DA55B67678CEF4 /* Pods_LicomServiceExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +115,7 @@
 		01D185E81E9BBAF400405BC4 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		01D185F41E9CC2EE00405BC4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		01D185F61E9D17BD00405BC4 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		21E112F5E63F0BDCC567CF18 /* Pods_Helloworld.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Helloworld.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DADC50A1EF40FB5002933CC /* myContentExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = myContentExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DADC50B1EF40FB5002933CC /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		3DADC50D1EF40FB5002933CC /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
@@ -126,6 +130,14 @@
 		3DADD3801EF1777600AC6BD8 /* NotifSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifSample.m; sourceTree = "<group>"; };
 		3DADD3821EF1785400AC6BD8 /* NotifSample.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotifSample.h; sourceTree = "<group>"; };
 		3DADD3841EF2876D00AC6BD8 /* Helloworld.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Helloworld.entitlements; sourceTree = "<group>"; };
+		44BBFC233A0BC43BFF889CE5 /* Pods-LicomServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LicomServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LicomServiceExtension/Pods-LicomServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		4C8E8AECC8B52508436F7ACE /* Pods-LicomServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LicomServiceExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-LicomServiceExtension/Pods-LicomServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		63A18949B5DA55B67678CEF4 /* Pods_LicomServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LicomServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8977955FE165E38035CFE54D /* Pods-myContentExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myContentExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-myContentExtension/Pods-myContentExtension.release.xcconfig"; sourceTree = "<group>"; };
+		A2C84C98384EA082DAA47852 /* Pods-myContentExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myContentExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-myContentExtension/Pods-myContentExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		A2E5D51D23A469AFE2C9144A /* Pods-Helloworld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Helloworld.release.xcconfig"; path = "Pods/Target Support Files/Pods-Helloworld/Pods-Helloworld.release.xcconfig"; sourceTree = "<group>"; };
+		AA310BA64E12CCE5DE9FE8B9 /* Pods_myContentExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myContentExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D316EF111D450BBB64CB9D89 /* Pods-Helloworld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Helloworld.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Helloworld/Pods-Helloworld.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01D185F51E9CC2EE00405BC4 /* MapKit.framework in Frameworks */,
+				9121552EFAFA4896BBCEB336 /* Pods_Helloworld.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +156,7 @@
 			files = (
 				3DADC50E1EF40FB5002933CC /* UserNotificationsUI.framework in Frameworks */,
 				3DADC50C1EF40FB5002933CC /* UserNotifications.framework in Frameworks */,
+				A0BDA3244EC041A8C62C838A /* Pods_myContentExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAFE8D8C2570BF969DF1747F /* Pods_LicomServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +267,7 @@
 				3DADC5251EF915EE002933CC /* LicomServiceExtension */,
 				0146E9871E7FE630006238AF /* Products */,
 				01D185F31E9CC2ED00405BC4 /* Frameworks */,
+				3C52F11E5274186282838EA8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -293,8 +309,24 @@
 				01D185F41E9CC2EE00405BC4 /* MapKit.framework */,
 				3DADC50B1EF40FB5002933CC /* UserNotifications.framework */,
 				3DADC50D1EF40FB5002933CC /* UserNotificationsUI.framework */,
+				21E112F5E63F0BDCC567CF18 /* Pods_Helloworld.framework */,
+				63A18949B5DA55B67678CEF4 /* Pods_LicomServiceExtension.framework */,
+				AA310BA64E12CCE5DE9FE8B9 /* Pods_myContentExtension.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3C52F11E5274186282838EA8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D316EF111D450BBB64CB9D89 /* Pods-Helloworld.debug.xcconfig */,
+				A2E5D51D23A469AFE2C9144A /* Pods-Helloworld.release.xcconfig */,
+				44BBFC233A0BC43BFF889CE5 /* Pods-LicomServiceExtension.debug.xcconfig */,
+				4C8E8AECC8B52508436F7ACE /* Pods-LicomServiceExtension.release.xcconfig */,
+				A2C84C98384EA082DAA47852 /* Pods-myContentExtension.debug.xcconfig */,
+				8977955FE165E38035CFE54D /* Pods-myContentExtension.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		3DADC50F1EF40FB5002933CC /* myContentExtension */ = {
@@ -333,10 +365,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0146E9981E7FE630006238AF /* Build configuration list for PBXNativeTarget "Helloworld" */;
 			buildPhases = (
+				DA034E2005865E026CD9EA85 /* [CP] Check Pods Manifest.lock */,
 				0146E9821E7FE630006238AF /* Sources */,
 				0146E9831E7FE630006238AF /* Frameworks */,
 				0146E9841E7FE630006238AF /* Resources */,
 				3DADC51C1EF40FB5002933CC /* Embed App Extensions */,
+				4367B30B8FBC67638A79277B /* [CP] Embed Pods Frameworks */,
+				44B3C1E7B0722C0627B2BF68 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -353,9 +388,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3DADC51B1EF40FB5002933CC /* Build configuration list for PBXNativeTarget "myContentExtension" */;
 			buildPhases = (
+				F090094E655E9A4994FE78D3 /* [CP] Check Pods Manifest.lock */,
 				3DADC5061EF40FB5002933CC /* Sources */,
 				3DADC5071EF40FB5002933CC /* Frameworks */,
 				3DADC5081EF40FB5002933CC /* Resources */,
+				FCECAE013607104D600BBE0C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -370,9 +407,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3DADC52C1EF915EE002933CC /* Build configuration list for PBXNativeTarget "LicomServiceExtension" */;
 			buildPhases = (
+				FC491408D37756E99E30627C /* [CP] Check Pods Manifest.lock */,
 				3DADC5201EF915EE002933CC /* Sources */,
 				3DADC5211EF915EE002933CC /* Frameworks */,
 				3DADC5221EF915EE002933CC /* Resources */,
+				F4E081131CDC7525EBFD5311 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -474,6 +513,114 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4367B30B8FBC67638A79277B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Helloworld/Pods-Helloworld-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		44B3C1E7B0722C0627B2BF68 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Helloworld/Pods-Helloworld-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DA034E2005865E026CD9EA85 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F090094E655E9A4994FE78D3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F4E081131CDC7525EBFD5311 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LicomServiceExtension/Pods-LicomServiceExtension-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC491408D37756E99E30627C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FCECAE013607104D600BBE0C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-myContentExtension/Pods-myContentExtension-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0146E9821E7FE630006238AF /* Sources */ = {
@@ -663,6 +810,7 @@
 		};
 		0146E9991E7FE630006238AF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D316EF111D450BBB64CB9D89 /* Pods-Helloworld.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -684,6 +832,7 @@
 		};
 		0146E99A1E7FE630006238AF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2E5D51D23A469AFE2C9144A /* Pods-Helloworld.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -704,6 +853,7 @@
 		};
 		3DADC5191EF40FB5002933CC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2C84C98384EA082DAA47852 /* Pods-myContentExtension.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				DEVELOPMENT_TEAM = 57EE7HVFSH;
@@ -719,6 +869,7 @@
 		};
 		3DADC51A1EF40FB5002933CC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8977955FE165E38035CFE54D /* Pods-myContentExtension.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				DEVELOPMENT_TEAM = 57EE7HVFSH;
@@ -734,6 +885,7 @@
 		};
 		3DADC52D1EF915EE002933CC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44BBFC233A0BC43BFF889CE5 /* Pods-LicomServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				DEVELOPMENT_TEAM = 57EE7HVFSH;
@@ -749,6 +901,7 @@
 		};
 		3DADC52E1EF915EE002933CC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C8E8AECC8B52508436F7ACE /* Pods-LicomServiceExtension.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				DEVELOPMENT_TEAM = 57EE7HVFSH;
@@ -790,6 +943,7 @@
 				3DADC51A1EF40FB5002933CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3DADC52C1EF915EE002933CC /* Build configuration list for PBXNativeTarget "LicomServiceExtension" */ = {
 			isa = XCConfigurationList;
@@ -798,6 +952,7 @@
 				3DADC52E1EF915EE002933CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
