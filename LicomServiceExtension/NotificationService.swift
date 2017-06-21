@@ -74,6 +74,9 @@ class NotificationService: UNNotificationServiceExtension {
                     }
                 }
             }
+            else {
+                contentHandler(bestAttemptContent)
+            }
         }
     }
     
