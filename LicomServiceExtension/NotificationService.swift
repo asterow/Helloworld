@@ -19,7 +19,7 @@ class NotificationService: UNNotificationServiceExtension {
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
-        print("didReceive: STARTING !")
+        print("### didReceive: BEGIN ###")
         
         if let bestAttemptContent = bestAttemptContent {
             // Modify the notification content here...
@@ -29,45 +29,52 @@ class NotificationService: UNNotificationServiceExtension {
                     print("didReceive: GUARD contents")
                     return contentHandler(bestAttemptContent)
                 }
-//                for (index, content) in contents.enumerated() {
-//                    if let id = content["id"] {
-//                        print("id[\(index)] = \(id)")
-//                    }
-//                }
-                if contents.count == 1 {
-                    bestAttemptContent.title = "1 Nouveau bien disponible !"
-                }
-                else {
+                bestAttemptContent.title = "1 Nouveau bien disponible !"
+                if contents.count > 0 {
                     bestAttemptContent.title = "\(contents.count) Nouveaux biens disponibles !"
                 }
                 
                 // recuperer id du bien et creer url de la loc
-                guard let firstId = contents[0]["id"] as? String else {
-                    return contentHandler(bestAttemptContent)
+                guard let firstId = contents[0]["id"] as? String,
+                    let webUrl = URL(string: "http://www.logic-immo.com/detail-location-\(firstId).htm") else {
+                        return contentHandler(bestAttemptContent)
                 }
-                guard let firstUrl = URL(string: "http://www.logic-immo.com/detail-location-\(firstId).htm") else {
-                    return contentHandler(bestAttemptContent)
-                }
-                print("firstUrl = \(firstUrl.absoluteString)")
+                print("webUrl: \(webUrl.absoluteString)")
                 // faire un GET sur cette url
-                Alamofire.request(firstUrl.absoluteString).responseString { response in
-                    print("response.result.isSuccess: \(response.result.isSuccess)")
+                Alamofire.request(webUrl.absoluteString).responseString { response in
+                    // parser le HTML avec Kanna
                     if let html = response.result.value, let doc = HTML(html: html, encoding: .utf8) {
-                        // parser le HTML avec Kanna
+                        print("web page scraped, size: \(html.characters.count)")
                         // recup description
-                        print("SCRAPED_PAGE size = \(html.characters.count)\n")
-                        let title = doc.at_css("title")?.content?.replacingOccurrences(of: " - Logic-immo.com", with: "").trimmingCharacters(in: .whitespaces)
-                        bestAttemptContent.body = title!
-                        print("title:\(title!)")
+                        guard let titleNode = doc.at_css("title"),
+                            let description = titleNode.content?.replacingOccurrences(of: " - Logic-immo.com", with: "").trimmingCharacters(in: .whitespaces) else {
+                                return contentHandler(bestAttemptContent)
+                        }
+                        bestAttemptContent.body = description
+                        print("description: \(description)")
+                        if let priceNode = doc.at_css(".main-price"), let price = priceNode.content?.trimmingCharacters(in: .whitespacesAndNewlines),
+                            let localityNode = doc.at_css(".locality > span"), let locality = localityNode.content?.trimmingCharacters(in: .whitespacesAndNewlines),
+                            let areaNode = doc.at_css(".area"), let area = areaNode.content?.trimmingCharacters(in: .whitespacesAndNewlines),
+                            let roomNode = doc.at_css(".offer-rooms"), let room = roomNode.content?.trimmingCharacters(in: .whitespacesAndNewlines),
+                            let typeNode = doc.at_css(".type"), let type = typeNode.content?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                            print("type: \(type)")
+                            print("room: \(room)")
+                            print("area: \(area)")
+                            print("locality: \(locality)")
+                            print("price: \(price)")
+                        }
                         // recup image
-                        let img = doc.at_css("#offer_pictures_main")
-                        let imgSrc = img?["src"]
-                        let imgUrl = URL(string: imgSrc!)
-                        print("Kanna img src = \(imgUrl!)")
+                        guard let img = doc.at_css("#offer_pictures_main"),
+                            let imgSrc = img["src"],
+                            let imgUrl = URL(string: imgSrc) else {
+                                return contentHandler(bestAttemptContent)
+                        }
                         // Telecharger Image et inclure dans la notif
-                        self.downloadWithURL(url: imgUrl!, completion: { (complete) in
+                        self.downloadWithURL(url: imgUrl, completion: { (complete) in
                             if complete == true {
-                                print("true")
+                                print("### Completion: true ###")
+                            } else {
+                                print("### Completion: false ###")
                             }
                             contentHandler(bestAttemptContent)
                         })
@@ -90,29 +97,29 @@ class NotificationService: UNNotificationServiceExtension {
     }
     
     private func downloadWithURL(url: URL, completion: @escaping (Bool) -> Void) {
-        print("url absolute = \(url.absoluteString)")
-        let remoteUrl = url.absoluteString
+        let imgRemoteUrl = url.absoluteString
+        print("imgRemoteUrl: \(imgRemoteUrl)")
         let task = URLSession.shared.downloadTask(with: url) { (downloadedUrl, response, error) in
             guard let downloadedUrl = downloadedUrl else {
                 completion(false)
                 return
             }
             let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-            var url = URL(fileURLWithPath: path)
-            url = url.appendingPathComponent("pic.jpg")
-            print("URL = \(url)")
-            try? FileManager.default.moveItem(at: downloadedUrl, to: url)
-            
+            let imgFileUrl = URL(fileURLWithPath: path).appendingPathComponent("pic.jpg")
+            print("downloadedFileUrl: \(downloadedUrl)")
+            print("imgFileUrl: \(imgFileUrl)")
+            try? FileManager.default.moveItem(at: downloadedUrl, to: imgFileUrl)
             do {
-                let attachment = try UNNotificationAttachment(identifier: remoteUrl, url: url, options: nil)
+                print("try 1")
+                let attachment = try UNNotificationAttachment(identifier: imgRemoteUrl, url: imgFileUrl, options: nil)
+                print("try 2")
                 defer {
                     self.bestAttemptContent?.attachments = [attachment]
-                    print("attachment added, identifier = \(remoteUrl)")
                     completion(true)
                 }
             }
             catch {
-                completion(true)
+                completion(false)
             }
         }
         task.resume()
