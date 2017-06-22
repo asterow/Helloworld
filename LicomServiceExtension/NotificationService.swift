@@ -110,9 +110,7 @@ class NotificationService: UNNotificationServiceExtension {
             print("imgFileUrl: \(imgFileUrl)")
             try? FileManager.default.moveItem(at: downloadedUrl, to: imgFileUrl)
             do {
-                print("try 1")
                 let attachment = try UNNotificationAttachment(identifier: imgRemoteUrl, url: imgFileUrl, options: nil)
-                print("try 2")
                 defer {
                     self.bestAttemptContent?.attachments = [attachment]
                     completion(true)
