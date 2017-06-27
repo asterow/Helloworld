@@ -16,7 +16,6 @@ target 'LicomServiceExtension' do
   use_frameworks!
 
   # Pods for LicomServiceExtension
-  pod "SwiftSoup"
   pod 'Alamofire', '~> 4.4'
   pod 'Kanna', '~> 2.1.0'
 end

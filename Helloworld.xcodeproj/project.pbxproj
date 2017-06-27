@@ -45,6 +45,8 @@
 		3DADC5271EF915EE002933CC /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC5261EF915EE002933CC /* NotificationService.swift */; };
 		3DADC52B1EF915EE002933CC /* LicomServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3DADC5241EF915EE002933CC /* LicomServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3DADD3811EF1777600AC6BD8 /* NotifSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DADD3801EF1777600AC6BD8 /* NotifSample.m */; };
+		3DD5A0861F02A789002DF116 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0146E9901E7FE630006238AF /* Assets.xcassets */; };
+		3DD5A0871F02A789002DF116 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0146E9901E7FE630006238AF /* Assets.xcassets */; };
 		9121552EFAFA4896BBCEB336 /* Pods_Helloworld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21E112F5E63F0BDCC567CF18 /* Pods_Helloworld.framework */; };
 		A0BDA3244EC041A8C62C838A /* Pods_myContentExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA310BA64E12CCE5DE9FE8B9 /* Pods_myContentExtension.framework */; };
 		CAFE8D8C2570BF969DF1747F /* Pods_LicomServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63A18949B5DA55B67678CEF4 /* Pods_LicomServiceExtension.framework */; };
@@ -501,6 +503,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DD5A0861F02A789002DF116 /* Assets.xcassets in Resources */,
 				3DADC5141EF40FB5002933CC /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,6 +512,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DD5A0871F02A789002DF116 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -823,6 +827,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.logicimmo.FTtestAPNS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Helloworld/Helloworld-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -845,6 +850,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.logicimmo.FTtestAPNS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Helloworld/Helloworld-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

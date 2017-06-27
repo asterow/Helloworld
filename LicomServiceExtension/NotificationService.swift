@@ -29,12 +29,13 @@ class NotificationService: UNNotificationServiceExtension {
                     print("didReceive: GUARD contents")
                     return contentHandler(bestAttemptContent)
                 }
+                
                 bestAttemptContent.title = "1 Nouveau bien disponible !"
                 if contents.count > 0 {
                     bestAttemptContent.title = "\(contents.count) Nouveaux biens disponibles !"
                 }
                 
-                // recuperer id du bien et creer url de la loc
+                // recuperer id du 1er bien et creer url de la loc
                 guard let firstId = contents[0]["id"] as? String,
                     let webUrl = URL(string: "http://www.logic-immo.com/detail-location-\(firstId).htm") else {
                         return contentHandler(bestAttemptContent)
@@ -62,6 +63,13 @@ class NotificationService: UNNotificationServiceExtension {
                             print("area: \(area)")
                             print("locality: \(locality)")
                             print("price: \(price)")
+                            
+                            var adsInfos = [["type": type, "room": room, "area": area, "locality": locality, "price": price]]
+                            adsInfos.append(["type": type, "room": room, "area": area, "locality": locality, "price": price])
+                            
+                            self.bestAttemptContent?.userInfo.updateValue(adsInfos, forKey: "adsInfos")
+                            
+//                            print("self.bestAttemptContent?.userInfo.count: \(self.bestAttemptContent?.userInfo.description)")
                         }
                         // recup image
                         guard let img = doc.at_css("#offer_pictures_main"),
