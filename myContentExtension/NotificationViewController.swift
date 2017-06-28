@@ -13,19 +13,15 @@ import UserNotificationsUI
 
 class NotificationViewController: UIViewController, UNNotificationContentExtension, UITableViewDataSource, UITableViewDelegate {
     
-//    @IBOutlet var tableView: UITableView?
-    //@IBOutlet var label: UILabel?
     @IBOutlet weak var tableView: UITableView!
     var adsInfos =  [Dictionary<String, String>]()
     var adsImages = [UIImage]()
     var notif: UNNotification?
-//    var adsInfos :  [Dictionary<String, String>]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad !")
         self.tableView.separatorColor = UIColor.clear
-//        tableView.rowHeight = UITableViewAutomaticDimension
         // Do any required interface initialization here.
     }
     
@@ -34,53 +30,37 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         notif = notification
         if let liste = notification.request.content.userInfo["adsInfos"] as? [Dictionary<String, String>] {
             self.adsInfos = liste
+            self.adsInfos.reverse()
         }
-        
+        print("notification.request.content.attachments.count: \(notification.request.content.attachments.count)")
         for attachement in notification.request.content.attachments {
             if attachement.url.startAccessingSecurityScopedResource(), let data = try? Data(contentsOf: attachement.url), let img = UIImage(data: data) {
                 self.adsImages.append(img)
             }
             attachement.url.stopAccessingSecurityScopedResource()
         }
+        self.adsImages.reverse()
+        print("adsImages.count: \(self.adsImages.count)")
         
         
-//        for (index, adInfos) in adsInfos.enumerated() {
-//            if let content = notif?.request.content {
-//                let attachement = content.attachments[0]
-//                print("startAccessingSecurityScopedResource")
-//                if attachement.url.startAccessingSecurityScopedResource() {
-//                    if let data = try? Data(contentsOf: attachement.url) {
-//                        adsImages.append(UIImage(data: data)!)
-//                    }
-//                    attachement.url.stopAccessingSecurityScopedResource()
-//                }
-//            }
-//        }
+        
         self.tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("numberOfRowsInSection !")
-  
+        
         return adsInfos.count
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return CGFloat.ini
-//        return CGSize.init(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
-//
-//    }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "licomTableViewCell", for: indexPath) as? LicomTableViewCell
         {
-//            if let adInfos = adsInfos[indexPath.row] {
-//                
-//            }
-            
             let adInfos = adsInfos[indexPath.row]
             if  let price = adInfos["price"], let type = adInfos["type"], let room = adInfos["room"], let locality = adInfos["locality"], let area = adInfos["area"] {
-                cell.cellImageView.image = adsImages[0]
+                cell.cellImageView.image = adsImages[indexPath.row]
                 cell.priceLabel.text = price
                 cell.locationLabel.text = locality
                 cell.typeLabel.text = type
@@ -93,24 +73,6 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         print("return UITableViewCell() !")
         return UITableViewCell()
     }
-    
-    
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
-//    
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 3
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "LicomTableViewCell") as? LicomTableViewCell else {
-//            print("cellForRowAt: Guard !")
-//            return UITableViewCell()
-//        }
-//        print("cellForRowAt: return !")
-//        return cell
-//    }
     
 }
 

@@ -29,7 +29,7 @@
 			<key>UNNotificationExtensionCategory</key>
 			<string>LICOM_CATEGORY</string>
 			<key>UNNotificationExtensionInitialContentSizeRatio</key>
-			<real>1</real>
+			<integer>1</integer>
 		</dict>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>
